@@ -70,10 +70,65 @@ class user
         }
     }
 
+    public function profil($id, $oldmdp, $login, $mail, $mdp = '', $mdp_conf = '')
+    {
+        $requete = $this->bdd->prepare("SELECT password FROM users WHERE id = :id ");
+        $requete->execute(array(':id' => $id));
+        $resultat = $requete->fetch(PDO::FETCH_ASSOC);
+        if (password_verify($oldmdp, $resultat["password"])) {
+            if ($login != NULL) {
+                $requete_log = $this->bdd->prepare("SELECT id,login FROM users WHERE login = :login ");
+                $requete_log->execute(array(':login' => $login));
+                $resultat_log = $requete_log->fetch(PDO::FETCH_ASSOC);
+                if (empty($resultat_log)) {
+                    $this->login = $login;
+                } elseif ($resultat_log['id'] == $id) {
+                    $this->login = $login;
+                } else {
+                    $this->lastmessage = 'Ce login est déjà utilisé';
+                }
+            }
+            if ($mail != NULL) {
+                $requete_mail = $this->bdd->prepare("SELECT id,email FROM users WHERE email = :mail");
+                $requete_mail->execute(array(':mail' => $mail));
+                $resultat_mail = $requete_mail->fetch(PDO::FETCH_ASSOC);
+                if (empty($resultat_mail)) {
+                    $this->email = $mail;
+                } elseif ($resultat_mail['id'] == $id) {
+                    $this->email = $mail;
+                } else {
+                    $this->lastmessage = 'Ce mail correspond déjà à un utilisateur';
+                }
+            }
+            if (!empty($mdp) && !empty($mdp_conf)) {
+                if($mdp == $mdp_conf)
+                {
+                    $mdp = password_hash($mdp, PASSWORD_BCRYPT, array('cost' => 12));
+                    $requete_mdp = $this->bdd->prepare("UPDATE users SET password = :mdp WHERE id = :id");
+                    $requete_mdp->execute(array(':mdp' => $mdp, ':id' => $id));
+                }
+                else{
+                    $this->lastmessage = 'Les deux mot de passe sont différents !';
+                }
+                
+            }
+            else{
+                $this->lastmessage = 'Veuillez confirmer le mot de passe !';
+            }
+            if (!isset($this->lastmessage)) {
+                $request = $this->bdd->prepare("UPDATE users SET login = :login, email = :mail WHERE id = :id");
+                $request->execute(array(':login' => $this->login, ':mail' => $this->email, ':id' => $id));
+                $this->lastmessage = 'Modification prise en compte';
+            }
+        } else {
+            $this->lastmessage = 'Vieux mot de passe erroné';
+        }
+    }
+
     public function disconnect()
     {
         session_destroy();
-        header('location:../index.php');
+        header('location:index.php');
     }
 
     public function getlastmessage()

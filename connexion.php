@@ -5,6 +5,11 @@ include 'class/user.php';
 session_start();
 $user = new user();
 
+if(isset($_SESSION['id']))
+{
+    header('location:index.php');
+}
+
 include 'include/traitement_co_inscri.php';
 ?>
 

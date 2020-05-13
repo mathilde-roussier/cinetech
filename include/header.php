@@ -12,7 +12,7 @@
           <input class="form-control mr-sm-2" type="search" name="search" id="search" list="liste" placeholder="Votre recherche" required>
           <datalist id="liste">
           </datalist>
-          <input class="btn btn-warning my-2 my-sm-0" type="submit" id="submit">
+          <input class="btn btn-warning my-2 my-sm-0" type="submit" id="submit"/>
     </form>
     </div>
   </nav>

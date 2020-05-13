@@ -16,7 +16,7 @@
      
 
   <!-- Copyright -->
-  <div class="footer-copyright text-center py-1 mb-0">
+  <div class="footer-copyright text-center py-3 mb-0">
     <p class="align-bottom">© 2020 Amélie CHARDON & Mathilde ROUSSIER</p>
   </div>
   <!-- Copyright -->

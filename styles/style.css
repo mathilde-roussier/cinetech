@@ -17,6 +17,8 @@ main
     justify-items: center;
     align-items: center;
     align-content: center;
+    background-image: url("../assets/3040.png");
+    background-size: cover;
     background-color: #6abfed;
 
 }

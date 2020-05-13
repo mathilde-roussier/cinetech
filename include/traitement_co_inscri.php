@@ -7,5 +7,5 @@ if(isset($_POST['inscription']))
 
 if(isset($_POST['connexion']))
 {
-    
+    $user->connexion($_POST['login_co'],$_POST['password_co']);
 }

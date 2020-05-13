@@ -1,7 +1,5 @@
 <?php
 
-// id	login email	password
-
 include "bdd.php";
 
 class user
@@ -11,6 +9,7 @@ class user
 
     private $id;
     private $login;
+    private $email;
     private $lastmessage;
 
     public function __construct()
@@ -36,10 +35,8 @@ class user
                     $requete->execute(array(':login' => $login, ':mdp' => $mdp, ':mail' => $mail));
                     $resultat = $requete->fetchAll(PDO::FETCH_ASSOC); // Supprimer ? 
                     $this->lastmessage = 'Inscription prise en compte !';
-                } elseif (!empty($resultat_mail)) {
-                    $this->lastmessage = 'Ce mail est déjà utilisé';
-                } elseif (!empty($resultat_log)) {
-                    $this->lastmessage = 'Ce login n\'est pas disponible';
+                } elseif (!empty($resultat_mail) || (!empty($resultat_log))) {
+                    $this->lastmessage = 'Ce mail et/ou login est déjà utilisé';
                 }
             } else {
                 $this->lastmessage = 'Les deux mots de passe sont différents';
@@ -51,25 +48,25 @@ class user
 
     public function connexion($login, $mdp)
     {
-        $requete = $this->bdd->prepare("SELECT * FROM users WHERE email = :mail");
-        $requete->execute(array(':mail' => $mail));
+        $requete = $this->bdd->prepare("SELECT * FROM users WHERE login = :login");
+        $requete->execute(array(':login' => $login));
         $resultat = $requete->fetchAll();
         if (!empty($resultat)) {
             foreach ($resultat as $infos) {
                 if (password_verify($mdp, $infos["password"])) {
                     $this->id = $infos["id"];
+                    $this->login = $infos["login"];
+                    $this->email = $infos["email"];
                     $_SESSION['id'] = $this->id;
-                    $_SESSION['nom'] = $infos["lastname"];
-                    $_SESSION['prenom'] = $infos["firstname"];
-                    $_SESSION['birthday'] = $infos["birthday"];
-                    $_SESSION['points'] = $infos["points"];
+                    $_SESSION['login'] = $this->login;
+                    $_SESSION['email'] = $this->email;
                     header('location:index.php');
                 } else {
                     $this->lastmessage = 'Erreur de mot de passe';
                 }
             }
         } else {
-            $this->lastmessage = 'Ce mail n\' existe pas';
+            $this->lastmessage = 'Cet utilisateur n\' existe pas';
         }
     }
 
@@ -87,6 +84,11 @@ class user
     public function getlogin()
     {
         return $this->login;
+    }
+
+    public function getemail()
+    {
+        return $this->email;
     }
 
     public function getid()

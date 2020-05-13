@@ -1,0 +1,53 @@
+
+html
+{
+    margin:0;
+    padding:0;
+}
+
+body
+{
+    height: 100vh;
+}
+
+main
+{
+    min-height: 80vh;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    background-color: #6abfed;
+
+}
+
+.container-xl
+{
+    background-color: #e9ecef;
+}
+
+header, nav
+{
+    background-color: #e68a72;
+}
+
+footer
+{
+    background-color: #3c549b;
+}
+
+.bloc
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    justify-content: center;
+}
+
+table
+{
+    text-align: center;
+}
+

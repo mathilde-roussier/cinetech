@@ -1,6 +1,6 @@
 <?php
 
-include 'include/requete_film.php';
+include 'include/requete_serie.php';
 
 ?>
 
@@ -22,26 +22,29 @@ include 'include/requete_film.php';
     <script src='https://code.jquery.com/jquery-3.4.1.js'></script>
     <script src="js/pagination.js"></script>
 
-    <title>Film</title>
+    <title>Serie</title>
 </head>
 
 <body>
     <main class="container row col-12 justify-content-around">
+
         <section class='container row col-12 justify-content-around'>
+
             <?php
-            foreach ($data_decode['results'] as $film) {
-                $film = get_object_vars($film);
+            foreach ($data_decode['results'] as $serie) {
+                $serie = get_object_vars($serie);
             ?>
-                <div id="<?php echo $film['id']; ?>" class="card col-2 p-0 m-2" style="width: 18rem;">
-                    <img src="<?php echo "https://image.tmdb.org/t/p/w500" . $film["poster_path"]; ?>" class="card-img-top" alt="...">
+                <div id="<?php echo $serie['id']; ?>" class="card col-2 p-0 m-2" style="width: 18rem;">
+                    <img src="<?php echo "https://image.tmdb.org/t/p/w500" . $serie["poster_path"]; ?>" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h6 class="card-subtitle mb-2 text-muted"><?php echo $film['vote_average']; ?></h6>
-                        <h5 class="card-title"><?php echo $film['title']; ?></h5>
+                        <h6 class="card-subtitle mb-2 text-muted"><?php echo $serie['vote_average']; ?></h6>
+                        <h5 class="card-title"><?php echo $serie['name']; ?></h5>
                         <a href="#" class="btn btn-primary">En voir plus</a>
                     </div>
                 </div>
             <?php
             }
+
             ?>
         </section>
 

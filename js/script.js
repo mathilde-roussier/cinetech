@@ -1,5 +1,10 @@
 $(document).ready(function(){
-
+  
+  //Fonction pour créer le fichier data.txt (TEST)
+  $.ajax(
+    //Page vers laquelle est envoyée la requête
+    'autocomplete.php',
+  );
 
   //Fonction pour mettre une majuscule au début de a chaîne de caractères
   function strUcFirst(a){
@@ -13,27 +18,34 @@ $(document).ready(function(){
 
       $.get(
         //Page vers laquelle est envoyée la requête
-        'autocomplete.php',
+        'data.txt',
         {
           //Récupération des inputs du formulaires
-          search : encodeURI($("#search").val()),
+          search : $("#search").val(),
         },
   
         function(data){
-          console.log(encodeURI($("#search").val()));
           var results = JSON.parse(data);
 
           //var results=results.results;
           search=strUcFirst($("#search").val());
           var propositions=[];
-          
-          results.forEach(result => {
-            if((result.title).startsWith(search)==true)
-            {
-              var key=results.indexOf(result);
-              propositions[key] = result.title;
-            }
-          });
+          if(propositions.length<5)
+          {
+            results.forEach(result => {
+              //console.log(result.id);
+              if(propositions.length<5)
+              {
+                if((result).startsWith(search)==true)
+                {
+                  if(propositions.length<5)
+                  {
+                    propositions.push(result);
+                  }
+                }
+              }
+            });
+          }
 
           //Si la barre de recherche est vide
           if($("#search").val()==="")

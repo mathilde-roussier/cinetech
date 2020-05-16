@@ -37,7 +37,7 @@ include 'include/requete_film.php';
                     <div class="card-body">
                         <h6 class="card-subtitle mb-2 text-muted"><?php echo $film['vote_average']; ?></h6>
                         <h5 class="card-title"><?php echo $film['title']; ?></h5>
-                        <a href="#" class="btn btn-primary">En voir plus</a>
+                        <a href="details.php?id_film=<?php echo $film['id']; ?>" class="btn btn-primary">En voir plus</a>
                     </div>
                 </div>
             <?php

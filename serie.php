@@ -39,7 +39,7 @@ include 'include/requete_serie.php';
                     <div class="card-body">
                         <h6 class="card-subtitle mb-2 text-muted"><?php echo $serie['vote_average']; ?></h6>
                         <h5 class="card-title"><?php echo $serie['name']; ?></h5>
-                        <a href="#" class="btn btn-primary">En voir plus</a>
+                        <a href="details.php?id_serie=<?php echo $serie['id']; ?>" class="btn btn-primary">En voir plus</a>
                     </div>
                 </div>
             <?php

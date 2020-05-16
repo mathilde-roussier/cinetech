@@ -36,7 +36,13 @@ $(document).ready(function () {
                         var title = "<h5 class='card-title'>" + value['name'] + "</h5>";
                     }
                     $('#infos' + value['id']).append(title);
-                    var but = "<a href='#' class='btn btn-primary'>En voir plus</a>";
+                    if( page_actuel === 'film.php')
+                    {
+                        var but = "<a href='details.php?id_film="+value['id']+"' class='btn btn-primary'>En voir plus</a>";
+                    }
+                    else{
+                        var but = "<a href='details.php?id_serie="+value['id']+"' class='btn btn-primary'>En voir plus</a>";
+                    }
                     $('#infos' + value['id']).append(but);
                 })
 

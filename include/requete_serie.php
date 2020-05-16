@@ -30,36 +30,46 @@ if (empty($_GET)) {
 } else {
 
     foreach ($_GET as $champ => $info) {
-        if($champ == 'page')
-        {
+        if ($champ == 'page') {
             // set url
-            $newurl = $url . '&' . $champ ."=".$info;
+            $newurl = $url . '&' . $champ . "=" . $info;
+            // echo $newurl;
+        } elseif ($champ == 'id_serie') {
+            // set url
+            $newurl = "http://api.themoviedb.org/3/tv/" . $info . "?api_key=21265361ae3ee1f790c63a3a2973a4f2&language=fr-FR";
+            $newurl_credit = "http://api.themoviedb.org/3/tv/" . $info . "/credits?api_key=21265361ae3ee1f790c63a3a2973a4f2";
             // echo $newurl;
         }
-        elseif($champ == 'id_serie')
-        {
-            // set url
-            $newurl = "http://api.themoviedb.org/3/tv/".$info."?api_key=21265361ae3ee1f790c63a3a2973a4f2&language=fr-FR";
-            // echo $newurl;
-        }
-        
+
         curl_setopt($ch1, CURLOPT_URL, $newurl);
-    
-    //return the transfer as a string
-    curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);
 
-    // $output contains the output string
-    $output = curl_exec($ch1);
-    
-        if($champ == 'page')
-        {
+        //return the transfer as a string
+        curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);
+
+        // $output contains the output string
+        $output = curl_exec($ch1);
+
+        if ($champ == 'page') {
             echo $output;
+        } elseif ($champ == 'id_serie') {
+            curl_setopt($ch1, CURLOPT_URL, $newurl_credit);
+
+            //return the transfer as a string
+            curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);
+
+            // $output contains the output string
+            $output_credit = curl_exec($ch1);
+
+            $data_credit = JSON_decode($output_credit);
+            // var_dump($data);
+
+            $data_credit_decode = get_object_vars($data_credit);
         }
 
-    $data = JSON_decode($output);
-    // var_dump($data);
+        $data_detail = JSON_decode($output);
+        // var_dump($data);
 
-    $data_decode = get_object_vars($data);
+        $data_detail_decode = get_object_vars($data_detail);
     }
 
     // close curl resource to free up system resources

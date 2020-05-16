@@ -10,7 +10,7 @@ if(isset($_SESSION['id']))
     header('location:index.php');
 }
 
-include 'include/traitement_co_inscri.php';
+include 'include/traitement_co_inscri_profil.php';
 ?>
 
 <!DOCTYPE html>

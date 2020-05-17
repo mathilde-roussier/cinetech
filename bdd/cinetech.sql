@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mer. 13 mai 2020 à 08:53
+-- Généré le :  Dim 17 mai 2020 à 10:22
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.2.18
 
@@ -50,10 +50,13 @@ DROP TABLE IF EXISTS `favoris`;
 CREATE TABLE IF NOT EXISTS `favoris` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_users` int(11) DEFAULT NULL,
-  `favori` int(11) DEFAULT NULL,
+  `id_media` int(11) NOT NULL,
+  `nom_media` varchar(255) NOT NULL,
+  `type_media` varchar(255) NOT NULL,
+  `img_media` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_users` (`id_users`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -68,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

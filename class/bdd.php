@@ -26,11 +26,11 @@ class bdd
 	}
 
 	public function getfav()
-	{
+	{	
 		$requete = $this->connexion->prepare("SELECT * FROM favoris WHERE id_users = :id_session");
 		$requete->execute(array(':id_session' => $_SESSION['id']));
-		$resultat_fav = $requete->fetchAll(PDO::FETCH_ASSOC); //
-		echo json_encode(["id" => $resultat_fav['id_media'], "nom" => $resultat_fav['nom_media'],'type' => $resultat_fav['type_media'], "img" => $resultat_fav['img_media']]);
+		$resultat_fav = $requete->fetchAll(PDO::FETCH_ASSOC);
+		echo json_encode($resultat_fav);
 	}
 
 	public function close()

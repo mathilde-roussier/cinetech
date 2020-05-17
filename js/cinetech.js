@@ -2,11 +2,11 @@ $(document).ready(function () {
 
     // ********************** PAGINATION **********************
 
-    var chemin = window.location.pathname;
-    var decoupe_chemin = chemin.split('/');
-    var page_actuel = decoupe_chemin[3];
-
     $(".page-link").click(function () {
+        var chemin = window.location.pathname;
+        var decoupe_chemin = chemin.split('/');
+        var page_actuel = decoupe_chemin[3];
+
         var id = $(this).attr('id');
         var split_id = id.split('p');
         var page = split_id[1];
@@ -59,14 +59,14 @@ $(document).ready(function () {
 
     // ********************** Ajouter aux favoris **********************
 
-    var chemin_bis = window.location.href;
-    var decoupe_chemin_bis = chemin_bis.split('?');
-    var get = decoupe_chemin_bis[1];
-    var decoupe_get = get.split('=');
-    var champ = decoupe_get[0];
-    var id = decoupe_get[1];
-
     $('#favoris').click(function () {
+
+        var chemin_bis = window.location.href;
+        var decoupe_chemin_bis = chemin_bis.split('?');
+        var get = decoupe_chemin_bis[1];
+        var decoupe_get = get.split('=');
+        var champ = decoupe_get[0];
+        var id = decoupe_get[1];
 
         console.log('OK');
         console.log(id);
@@ -82,5 +82,24 @@ $(document).ready(function () {
             }
         })
     });
+
+    // ********************** Afficher les favoris **********************
+
+    $.ajax({
+        method: 'GET',
+        url: 'include/handler_bdd.php',
+        data: { 'function': 'getfav' },
+        datatype: "json",
+        success: function (datatype) {
+            var data = JSON.parse(datatype);
+            $.each(data, function (key, value) {
+                $('#div_favori').append('<div id="'+value['id_media']+'" class="card d-flex" style="width: 18rem;"></div>')
+                $('#'+value['id_media']).append('<img src="'+value['img_media']+'" class="card-img-top" alt="...">');
+                $('#'+value['id_media']).append('<div id="ss'+value['id_media']+'" class="card-body"></div>');
+                $('#ss'+value['id_media']).append('<h5 class="card-title">'+value['nom_media']+'</h5>');
+                $('#ss'+value['id_media']).append('<a class="btn btn-primary" href="details.php?'+value['type_media']+'='+value['id_media']+'">Voir plus</a>');
+            })
+        }
+    })
 
 });

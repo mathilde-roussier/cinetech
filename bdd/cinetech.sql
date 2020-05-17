@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 12 mai 2020 à 12:54
+-- Généré le :  mer. 13 mai 2020 à 08:53
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.2.18
 
@@ -32,9 +32,9 @@ USE `cinetech`;
 
 DROP TABLE IF EXISTS `commentaires`;
 CREATE TABLE IF NOT EXISTS `commentaires` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_users` int(11) DEFAULT NULL,
-  `commentaire` varchar(500) DEFAULT NULL,
+  `commentaire` longtext NOT NULL,
   `parent_id` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `id_users` (`id_users`)
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `commentaires` (
 
 DROP TABLE IF EXISTS `favoris`;
 CREATE TABLE IF NOT EXISTS `favoris` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_users` int(11) DEFAULT NULL,
   `favori` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -63,10 +63,10 @@ CREATE TABLE IF NOT EXISTS `favoris` (
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL,
-  `login` int(11) DEFAULT NULL,
-  `email` int(11) DEFAULT NULL,
-  `password` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `login` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 COMMIT;

@@ -13,6 +13,8 @@ include 'include/requete_film.php';
     <!-- css boostrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="styles/style.css">
+
     <!-- js boostrap -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -26,6 +28,9 @@ include 'include/requete_film.php';
 </head>
 
 <body>
+
+    <?php include 'include/header.php'; ?>
+
     <main class="container row col-12 justify-content-around">
         <section class='container row col-12 justify-content-around'>
             <?php
@@ -60,6 +65,8 @@ include 'include/requete_film.php';
         </nav>
 
     </main>
+
+    <?php include 'include/footer.php'; ?>
 
 </body>
 

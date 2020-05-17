@@ -1,13 +1,12 @@
-<?php 
+<?php
 
 include 'class/user.php';
 
 session_start();
 $user = new user();
 
-if(isset($_SESSION['id']))
-{
-    header('location:index.php');
+if (isset($_SESSION['id'])) {
+  header('location:index.php');
 }
 
 include 'include/traitement_co_inscri_profil.php';
@@ -21,11 +20,16 @@ include 'include/traitement_co_inscri_profil.php';
 
   <!-- css boostrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  
+
+  <link rel="stylesheet" href="styles/style.css">
+
   <title> Connexion - Inscription </title>
 </head>
 
 <body>
+
+  <?php include 'include/header.php'; ?>
+
   <main class="container row col-12">
     <section class="container col-3">
       <h2> Connexion </h2>
@@ -39,7 +43,7 @@ include 'include/traitement_co_inscri_profil.php';
           <input type="password" name="password_co" class="form-control" id="password">
         </div>
         <button type="submit" name="connexion" class="btn btn-primary">Connexion</button>
-        <?php if(isset($_POST['connexion'])) echo $user->getlastmessage(); ?>
+        <?php if (isset($_POST['connexion'])) echo $user->getlastmessage(); ?>
       </form>
     </section>
 
@@ -64,10 +68,12 @@ include 'include/traitement_co_inscri_profil.php';
           <input type="password" name="password_conf" class="form-control" id="password_conf">
         </div>
         <button type="submit" name="inscription" class="btn btn-primary">Inscription</button>
-        <?php if(isset($_POST['inscription'])) echo $user->getlastmessage(); ?>
+        <?php if (isset($_POST['inscription'])) echo $user->getlastmessage(); ?>
       </form>
     </section>
   </main>
+
+  <?php include 'include/footer.php'; ?>
 
 </body>
 

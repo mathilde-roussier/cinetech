@@ -25,6 +25,8 @@ foreach ($_GET as $champ => $info) {
     <!-- css boostrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="styles/style.css">
+
     <!-- notre js -->
     <script src='https://code.jquery.com/jquery-3.4.1.js'></script>
     <script src="js/cinetech.js"></script>
@@ -33,6 +35,9 @@ foreach ($_GET as $champ => $info) {
 </head>
 
 <body>
+
+    <?php include 'include/header.php'; ?>
+
 
     <main class="container">
 
@@ -99,6 +104,8 @@ foreach ($_GET as $champ => $info) {
         </div>
 
     </main>
+
+    <?php include 'include/footer.php'; ?>
 
 </body>
 

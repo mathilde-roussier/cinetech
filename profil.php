@@ -5,8 +5,7 @@ include 'class/user.php';
 session_start();
 $user = new user();
 
-if(!isset($_SESSION['id']))
-{
+if (!isset($_SESSION['id'])) {
     header('location:index.php');
 }
 
@@ -23,10 +22,15 @@ include 'include/traitement_co_inscri_profil.php';
     <!-- css boostrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="styles/style.css">
+
     <title> Profil </title>
 </head>
 
 <body>
+
+    <?php include 'include/header.php'; ?>
+
     <main class="container row col-12">
 
         <section class="container col-6">
@@ -58,6 +62,8 @@ include 'include/traitement_co_inscri_profil.php';
             </form>
         </section>
     </main>
+
+    <?php include 'include/footer.php'; ?>
 
 </body>
 

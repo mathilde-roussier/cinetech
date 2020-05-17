@@ -68,38 +68,61 @@ $(document).ready(function () {
         var champ = decoupe_get[0];
         var id = decoupe_get[1];
 
-        console.log('OK');
-        console.log(id);
-        console.log($('h5').html());
-        console.log($('img').attr('src'));
         $.ajax({
             method: "GET",
             url: "include/handler_bdd.php",
             data: { 'function': 'addfav', 'id': id, 'nom': $('h5').html(), 'img': $('img').attr('src'), 'type': champ },
             datatype: "json",
             success: function (datatype) {
-                console.log('ok envoyé');
+                console.log('ajouté');
+                $('button').replaceWith('<button type="button" class="btn col-3 btn-primary disabled d-flex align-items-baseline justify-content-between">Favori <svg class="bi bi-star-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"> <path d = "M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" /></svg ></button > ');
             }
         })
     });
 
     // ********************** Afficher les favoris **********************
 
-    $.ajax({
-        method: 'GET',
-        url: 'include/handler_bdd.php',
-        data: { 'function': 'getfav' },
-        datatype: "json",
-        success: function (datatype) {
-            var data = JSON.parse(datatype);
-            $.each(data, function (key, value) {
-                $('#div_favori').append('<div id="'+value['id_media']+'" class="card d-flex" style="width: 18rem;"></div>')
-                $('#'+value['id_media']).append('<img src="'+value['img_media']+'" class="card-img-top" alt="...">');
-                $('#'+value['id_media']).append('<div id="ss'+value['id_media']+'" class="card-body"></div>');
-                $('#ss'+value['id_media']).append('<h5 class="card-title">'+value['nom_media']+'</h5>');
-                $('#ss'+value['id_media']).append('<a class="btn btn-primary" href="details.php?'+value['type_media']+'='+value['id_media']+'">Voir plus</a>');
-            })
-        }
-    })
+    affichefav();
+
+    function affichefav() {
+        $('#div_favori').replaceWith('<div class="row col-12 justify-content-around" id="div_favori"></div>');
+        $.ajax({
+            method: 'GET',
+            url: 'include/handler_bdd.php',
+            data: { 'function': 'getfav' },
+            datatype: "json",
+            success: function (datatype) {
+                var data = JSON.parse(datatype);
+                $.each(data, function (key, value) {
+                    $('#div_favori').append('<div id="fav' + value['id_media'] + '" class="card d-flex m-2" style="width: 18rem;"></div>')
+                    $('#fav' + value['id_media']).append('<img src="' + value['img_media'] + '" class="card-img-top" alt="...">');
+                    $('#fav' + value['id_media']).append('<div id="ss' + value['id_media'] + '" class="card-body"></div>');
+                    $('#ss' + value['id_media']).append('<h5 class="card-title">' + value['nom_media'] + '</h5>');
+                    $('#ss' + value['id_media']).append('<aside class="d-flex justify-content-between" id="btn' + value['id_media'] + '"></aside>');
+                    $('#btn' + value['id_media']).append('<a class="btn btn-primary" href="details.php?' + value['type_media'] + '=' + value['id_media'] + '">Voir plus</a>');
+                    $('#btn' + value['id_media']).append('<button class="btn btn-danger">Supprimer</button>');
+                })
+
+                // ********************** Supprimer de la liste des favoris **********************
+
+                $('button').click(function () {
+                    var id_pa = $(this).parent().parent().parent().attr('id');
+                    var split_id = id_pa.split('fav');
+                    var id_suppr = split_id[1];
+                    console.log(id_suppr);
+                    $.ajax({
+                        method: 'GET',
+                        url: 'include/handler_bdd.php',
+                        data: { 'function': 'supprfav', 'id': id_suppr },
+                        datatype: "json",
+                        success: function (datatype) {
+                            $('#fav' + id_suppr).remove();
+                            affichefav();
+                        }
+                    })
+                });
+            }
+        });
+    }
 
 });

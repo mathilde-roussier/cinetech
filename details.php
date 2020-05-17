@@ -10,6 +10,12 @@ if (isset($_GET['id_film'])) {
     // var_dump($_GET['id_film']);
 }
 
+include 'class/bdd.php';
+
+session_start();
+
+$bdd = new bdd();
+
 foreach ($_GET as $champ => $info) {
     $type_media = $champ;
 }
@@ -93,7 +99,11 @@ foreach ($_GET as $champ => $info) {
                                 }
                             } ?></p>
 
-                <button id="favoris" type="button" class="btn btn-primary">Ajouter aux favoris</button>
+                <?php $bdd->checkfav($info); ?>
+
+                <!-- <button type="button" class="btn btn-primary disabled">Favori (etoile)</button>
+
+                <button id="favoris" type="button" class="btn btn-primary">Ajouter aux favoris</button> -->
 
             </div>
         </div>

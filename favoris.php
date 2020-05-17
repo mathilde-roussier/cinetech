@@ -32,7 +32,7 @@ if (!isset($_SESSION['id'])) {
 
         <section class="container">
             <h2> Mes Favoris </h2>
-            <div class="d-flex col-12 justify-content-around" id="div_favori">
+            <div class="row col-12 justify-content-around" id="div_favori">
             </div>
         </section>
     </main>

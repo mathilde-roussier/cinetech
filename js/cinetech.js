@@ -13,6 +13,7 @@ $(document).ready(function () {
             // var nbpage = $(this).parent().parent().attr('id');
 
             var id_next = $(this).parent().next().attr('name');
+            console.log(id_next);
 
             var id = $(this).attr('id');
             var split_id = id.split('p');
@@ -27,7 +28,6 @@ $(document).ready(function () {
                 datatype: "json",
                 success: function (datatype) {
                     var data = JSON.parse(datatype);
-                    console.log(data);
                     $('main section').replaceWith("<section class='container row col-12 justify-content-around'></section>");
                     $.each(data['results'], function (key, value) {
                         var div_p = "<div id='" + value['id'] + "'class='card col-2 p-0 m-2' style='width: 18rem;'></div>";
@@ -57,21 +57,44 @@ $(document).ready(function () {
                             var but = "<a href='details.php?id_serie=" + value['id'] + "' class='btn btn-primary'>En voir plus</a>";
                         }
                         $('#infos' + value['id']).append(but);
+
                         if (id_next === 'nop') {
+                            console.log(page);
+
+                            var prec_page = parseInt(page) - 14;
+                            if (prec_page <= 0) {
+                                prec_page = 1;
+                            }
+
                             $('#nbpage' + data['total_pages']).replaceWith('<div id="nbpage' + data['total_pages'] + '" class="d-flex justify-content-center"></div>');
-                            if (page != data['total_pages'] - 1) {
+                            
+                            if (page != data['total_pages'] - 1 && page != 1) {
                                 var plage = parseInt(page) + ((1 / 4) * data['total_pages']);
+                            }
+                            else if(page == 1)
+                            {
+                                var plage = ((1 / 4) * data['total_pages']);
                             }
                             else {
                                 var plage = parseInt(page) + 1;
                             }
+                            console.log(plage);
                             for (var i = page; i <= plage; i++) {
                                 var li = "<li id='" + i + "' class='page-item'><a id='p" + i + "' class='page-link'>" + i + "</a></li>";
                                 $('#nbpage' + data['total_pages']).append(li);
                             }
-                            if (page != data['total_pages'] - 1) {
-                                $('#nbpage' + data['total_pages']).append('<li name="nop" class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">...</a></li>');
+
+                            if(page != data['total_pages'] - 1){
+                                $('#nbpage' + data['total_pages']).append('<li name="nop" class="page-item disabled"><a class="page-link" tabindex="-1" aria-disabled="true">...</a></li>');
+                                var li = "<li id='" + data['total_pages'] + "' class='page-item'><a id='p" + data['total_pages'] + "' class='page-link'>" + data['total_pages'] + "</a></li>";
+                                $('#nbpage' + data['total_pages']).append(li);
                             }
+                            if(page != 1){
+                                $('#nbpage' + data['total_pages']).prepend('<li name="nop" class="page-item disabled"><a class="page-link" tabindex="-1" aria-disabled="true">...</a></li>');
+                                var li = "<li id='" + prec_page + "' class='page-item'><a id='p" + prec_page + "' class='page-link'>" + prec_page + "</a></li>";
+                                $('#nbpage' + data['total_pages']).prepend(li);
+                            }
+                            
                             $('#' + page).attr('class', 'page-item active');
                         }
                     })

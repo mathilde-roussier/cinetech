@@ -58,9 +58,6 @@ include 'include/requete_film.php';
 
         <nav aria-label="..." style='overflow:auto' ;>
             <ul class="pagination">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                </li>
                 <div id="nbpage<?php echo $data_decode['total_pages']; ?>" class="d-flex justify-content-center">
                     <?php for ($i = 1; $i <= ($data_decode['total_pages'] * 1 / 4); $i++) { ?>
                         <li id="<?php echo $i; ?>" <?php if ($i == 1) { ?>class="page-item active" <?php } else { ?> class="page-item" <?php } ?>><a id="p<?php echo $i; ?>" class="page-link"><?php echo $i; ?></a></li>
@@ -68,10 +65,10 @@ include 'include/requete_film.php';
                     <li name="nop" class="page-item disabled">
                         <a class="page-link" href="#" tabindex="-1" aria-disabled="true">...</a>
                     </li>
+                    <li id="<?php echo $data_decode['total_pages'];?>" class="page-item">
+                        <a id="p<?php echo $data_decode['total_pages'];?>" class="page-link"><?php echo $data_decode['total_pages'];?></a>
+                    </li>
                 </div>
-                <li class="page-item">
-                    <a class="page-link">Next</a>
-                </li>
             </ul>
         </nav>
 

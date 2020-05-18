@@ -1,11 +1,5 @@
 $(document).ready(function(){
   
-  //Fonction pour créer le fichier data.txt (TEST)
-  $.ajax(
-    //Page vers laquelle est envoyée la requête
-    'autocomplete.php',
-  );
-
   //Fonction pour mettre une majuscule au début de a chaîne de caractères
   function strUcFirst(a){
     return (a+'').charAt(0).toUpperCase()+a.substr(1);
@@ -18,7 +12,7 @@ $(document).ready(function(){
 
       $.get(
         //Page vers laquelle est envoyée la requête
-        'data.txt',
+        'autocomplete.php',
         {
           //Récupération des inputs du formulaires
           search : $("#search").val(),

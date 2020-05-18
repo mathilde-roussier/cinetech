@@ -1,10 +1,6 @@
 <?php
 
-if(!file_exists("data.txt"));
-unlink("data.txt");
-
 echo "[";
-file_put_contents ('data.txt' ,"[", FILE_APPEND );
 
 
 //FILMS
@@ -46,7 +42,6 @@ for($i=1;$i<=$total_pages_f;$i++)
     foreach ($titles as $title) {
         $data=json_encode($title["title"],true);
         echo $data.",";
-        file_put_contents ('data.txt' , $data.",", FILE_APPEND );
 
       }
   }
@@ -96,7 +91,6 @@ for($i=1;$i<=$total_pages_s;$i++)
       {
         $data=json_encode($title["name"],true);
         echo $data.",";
-        file_put_contents ('data.txt' , $data.",", FILE_APPEND );
 
       }
       else
@@ -105,7 +99,6 @@ for($i=1;$i<=$total_pages_s;$i++)
         {
           $data=json_encode($title["name"],true);
           echo $data.",";
-          file_put_contents ('data.txt' , $data.",", FILE_APPEND );
 
         }
         else
@@ -113,7 +106,6 @@ for($i=1;$i<=$total_pages_s;$i++)
 
           $data=json_encode($title["name"],true);
           echo $data;
-          file_put_contents ('data.txt' , $data, FILE_APPEND );
 
         }
       }
@@ -123,7 +115,6 @@ for($i=1;$i<=$total_pages_s;$i++)
 }
 
 echo "]";
-file_put_contents ('data.txt' , "]", FILE_APPEND );
 
 ?>
 

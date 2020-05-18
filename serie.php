@@ -56,15 +56,9 @@ include 'include/requete_serie.php';
 
         <nav aria-label="...">
             <ul class="pagination">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                </li>
                 <?php for ($i = 1; $i <= $data_decode['total_pages']; $i++) { ?>
-                    <li id="<?php echo $i; ?>" class="page-item"><a id="p<?php echo $i; ?>" class="page-link"><?php echo $i; ?></a></li>
+                    <li id="<?php echo $i; ?>" <?php if ($i == 1) { ?>class="page-item active" <?php } else { ?> class="page-item" <?php } ?>><a id="p<?php echo $i; ?>" class="page-link"><?php echo $i; ?></a></li>
                 <?php } ?>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
             </ul>
         </nav>
 

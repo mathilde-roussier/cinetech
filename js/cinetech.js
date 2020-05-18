@@ -58,7 +58,7 @@ $(document).ready(function () {
                         }
                         $('#infos' + value['id']).append(but);
                         if (id_next === 'nop') {
-                            $('nav div').replaceWith('<div id="nbpage' + data['total_pages'] + '" class="d-flex justify-content-center"></div>');
+                            $('#nbpage' + data['total_pages']).replaceWith('<div id="nbpage' + data['total_pages'] + '" class="d-flex justify-content-center"></div>');
                             if (page != data['total_pages'] - 1) {
                                 var plage = parseInt(page) + ((1 / 4) * data['total_pages']);
                             }

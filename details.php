@@ -99,11 +99,12 @@ foreach ($_GET as $champ => $info) {
                                 }
                             } ?></p>
 
-                <?php $bdd->checkfav($info); ?>
+                <?php if (isset($_SESSION['id'])) {
+                    $bdd->checkfav($info);
+                } else { ?>
+                    <a href="connexion.php" class="btn btn-primary">Ajouter aux favoris</a>
 
-                <!-- <button type="button" class="btn btn-primary disabled">Favori (etoile)</button>
-
-                <button id="favoris" type="button" class="btn btn-primary">Ajouter aux favoris</button> -->
+                <?php } ?>
 
             </div>
         </div>

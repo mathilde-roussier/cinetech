@@ -43,7 +43,12 @@ foreach ($_GET as $champ => $info) {
     <main class="container">
 
         <div class="media">
-            <img src="http://image.tmdb.org/t/p/w500<?php echo $data_detail_decode['poster_path']; ?>" class="mr-3" alt="...">
+            <?php if ($data_detail_decode['poster_path'] != null) { ?>
+                <img src="http://image.tmdb.org/t/p/w500<?php echo $data_detail_decode['poster_path']; ?>" class="mr-3" alt="...">
+            <?php } else { ?>
+                <img src="assets/no_img.jpg" class="mr-3" alt="...">
+            <?php } ?>
+
             <div class="media-body">
                 <div class="d-flex justify-content-between">
                     <?php if ($champ == 'id_film') { ?>

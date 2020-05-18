@@ -2,59 +2,85 @@ $(document).ready(function () {
 
     // ********************** PAGINATION **********************
 
-    $(".page-link").click(function () {
-        var chemin = window.location.pathname;
-        var decoupe_chemin = chemin.split('/');
-        var page_actuel = decoupe_chemin[3];
+    pagination();
 
-        var id = $(this).attr('id');
-        var split_id = id.split('p');
-        var page = split_id[1];
-        $('#' + page).attr('class', 'page-item active');
-        $($(this).parent().siblings()).attr('class', 'page-item');
-        $.ajax({
-            method: "GET",
-            url: "include/requete_" + page_actuel,
-            data: "page=" + page,
-            datatype: "json",
-            success: function (datatype) {
-                var data = JSON.parse(datatype);
-                console.log(data);
-                $('main section').replaceWith("<section class='container row col-12 justify-content-around'></section>");
-                $.each(data['results'], function (key, value) {
-                    var div_p = "<div id='" + value['id'] + "'class='card col-2 p-0 m-2' style='width: 18rem;'></div>";
-                    $('section').append(div_p);
-                    console.log(value['poster_path']);
-                    if (value['poster_path'] !== null) {
-                        var img = "<img src='https://image.tmdb.org/t/p/w500" + value['poster_path'] + "' class='card-img-top' alt='...'>";
-                    }
-                    else {
-                        var img = "<img src='assets/no_img.jpg' class='card-img-top' alt='...'>";
-                    }
-                    $('#' + value['id']).append(img);
-                    var div_i = "<div id='infos" + value['id'] + "'class='card-body'></div>";
-                    $('#' + value['id']).append(div_i);
-                    var note = "<h6 class='card-subtitle mb-2 text-muted'>" + value['vote_average'] + "</h6>";
-                    $('#infos' + value['id']).append(note);
-                    if (page_actuel === 'film.php') {
-                        var title = "<h5 class='card-title'>" + value['title'] + "</h5>";
-                    }
-                    else {
-                        var title = "<h5 class='card-title'>" + value['name'] + "</h5>";
-                    }
-                    $('#infos' + value['id']).append(title);
-                    if (page_actuel === 'film.php') {
-                        var but = "<a href='details.php?id_film=" + value['id'] + "' class='btn btn-primary'>En voir plus</a>";
-                    }
-                    else {
-                        var but = "<a href='details.php?id_serie=" + value['id'] + "' class='btn btn-primary'>En voir plus</a>";
-                    }
-                    $('#infos' + value['id']).append(but);
-                })
+    function pagination() {
+        $(".page-link").click(function () {
+            var chemin = window.location.pathname;
+            var decoupe_chemin = chemin.split('/');
+            var page_actuel = decoupe_chemin[3];
 
-            }
+            // var nbpage = $(this).parent().parent().attr('id');
+
+            var id_next = $(this).parent().next().attr('name');
+
+            var id = $(this).attr('id');
+            var split_id = id.split('p');
+            var page = split_id[1];
+
+            $('#' + page).attr('class', 'page-item active');
+            $($(this).parent().siblings()).attr('class', 'page-item');
+            $.ajax({
+                method: "GET",
+                url: "include/requete_" + page_actuel,
+                data: "page=" + page,
+                datatype: "json",
+                success: function (datatype) {
+                    var data = JSON.parse(datatype);
+                    console.log(data);
+                    $('main section').replaceWith("<section class='container row col-12 justify-content-around'></section>");
+                    $.each(data['results'], function (key, value) {
+                        var div_p = "<div id='" + value['id'] + "'class='card col-2 p-0 m-2' style='width: 18rem;'></div>";
+                        $('section').append(div_p);
+                        if (value['poster_path'] !== null) {
+                            var img = "<img src='https://image.tmdb.org/t/p/w500" + value['poster_path'] + "' class='card-img-top' alt='...'>";
+                        }
+                        else {
+                            var img = "<img src='assets/no_img.jpg' class='card-img-top' alt='...'>";
+                        }
+                        $('#' + value['id']).append(img);
+                        var div_i = "<div id='infos" + value['id'] + "'class='card-body'></div>";
+                        $('#' + value['id']).append(div_i);
+                        var note = "<h6 class='card-subtitle mb-2 text-muted'>" + value['vote_average'] + "</h6>";
+                        $('#infos' + value['id']).append(note);
+                        if (page_actuel === 'film.php') {
+                            var title = "<h5 class='card-title'>" + value['title'] + "</h5>";
+                        }
+                        else {
+                            var title = "<h5 class='card-title'>" + value['name'] + "</h5>";
+                        }
+                        $('#infos' + value['id']).append(title);
+                        if (page_actuel === 'film.php') {
+                            var but = "<a href='details.php?id_film=" + value['id'] + "' class='btn btn-primary'>En voir plus</a>";
+                        }
+                        else {
+                            var but = "<a href='details.php?id_serie=" + value['id'] + "' class='btn btn-primary'>En voir plus</a>";
+                        }
+                        $('#infos' + value['id']).append(but);
+                        if (id_next === 'nop') {
+                            $('nav div').replaceWith('<div id="nbpage' + data['total_pages'] + '" class="d-flex justify-content-center"></div>');
+                            if (page != data['total_pages'] - 1) {
+                                var plage = parseInt(page) + ((1 / 4) * data['total_pages']);
+                            }
+                            else {
+                                var plage = parseInt(page) + 1;
+                            }
+                            for (var i = page; i <= plage; i++) {
+                                var li = "<li id='" + i + "' class='page-item'><a id='p" + i + "' class='page-link'>" + i + "</a></li>";
+                                $('#nbpage' + data['total_pages']).append(li);
+                            }
+                            if (page != data['total_pages'] - 1) {
+                                $('#nbpage' + data['total_pages']).append('<li name="nop" class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">...</a></li>');
+                            }
+                            $('#' + page).attr('class', 'page-item active');
+                        }
+                    })
+                    pagination();
+                }
+            })
         })
-    })
+    }
+
 
 
     // ********************** Ajouter aux favoris **********************

@@ -67,7 +67,7 @@ if (empty($_GET)) {
         }
 
         $data_detail = JSON_decode($output);
-        // var_dump($data);
+        // var_dump($data_detail);
 
         $data_detail_decode = get_object_vars($data_detail);
     }

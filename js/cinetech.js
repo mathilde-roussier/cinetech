@@ -97,11 +97,11 @@ $(document).ready(function () {
         $.ajax({
             method: "GET",
             url: "include/handler_bdd.php",
-            data: { 'function': 'addfav', 'id': id, 'nom': $('h5').html(), 'img': $('img').attr('src'), 'type': champ },
+            data: { 'function': 'addfav', 'id': id, 'nom': $('h5').html(), 'img': $('#img_media').attr('src'), 'type': champ },
             datatype: "json",
             success: function (datatype) {
                 console.log('ajouté');
-                $('button').replaceWith('<button type="button" class="btn col-3 btn-primary disabled d-flex align-items-baseline justify-content-between">Favori <svg class="bi bi-star-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"> <path d = "M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" /></svg ></button > ');
+                $('#favoris').replaceWith('<button type="button" class="btn col-3 btn-primary disabled d-flex align-items-baseline justify-content-between">Favori <svg class="bi bi-star-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"> <path d = "M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" /></svg ></button > ');
             }
         })
     });
@@ -119,6 +119,7 @@ $(document).ready(function () {
             datatype: "json",
             success: function (datatype) {
                 var data = JSON.parse(datatype);
+                console.log(data);
                 $.each(data, function (key, value) {
                     $('#div_favori').append('<div id="fav' + value['id_media'] + '" class="card d-flex m-2" style="width: 18rem;"></div>')
                     $('#fav' + value['id_media']).append('<img src="' + value['img_media'] + '" class="card-img-top" alt="...">');

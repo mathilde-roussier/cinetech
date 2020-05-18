@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 include 'include/requete_serie.php';
 
 ?>

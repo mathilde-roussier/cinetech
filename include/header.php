@@ -2,7 +2,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-light">
   <img width="30" height="30" class="d-inline-block align-top m-2" src="assets/logo.png" alt="logo"/>
-    <a class="navbar-brand" href="https://laplateforme.io">L'Animatek</a>
+    <a class="navbar-brand" href="index.php">L'Animatek</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

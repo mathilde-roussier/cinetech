@@ -1,14 +1,5 @@
 <?php
 
-/*require 'class/bdd.php';
-
-session_start();
-
-if(!isset($_SESSION['bdd']))
-{
-  $_SESSION['bdd'] = new bdd();
-}
-*/
 if(isset($_GET['search']))
 {
   $search=$_GET['search'];
@@ -33,19 +24,130 @@ $err = curl_error($curl);
 
 curl_close($curl);
 
-
-if ($err) {
-  echo "cURL Error #:" . $err;
-} else {
-  echo $response;
-}
-
 }
 else
 {
   header("location:index.php");
 }
 ?>
+
+
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <title>L'Animatek - Films et séries d'animations francophones</title>
+</head>
+<body>
+<?php require ('include/header.php');?>
+<main class="p-5">
+  <section class="container-xl justify-content-around p-3">
+    
+    <?php
+    if ($err) 
+    {
+      echo "cURL Error #:" . $err;
+    } 
+    else 
+    {
+      $data=json_decode($response, true);
+      $titles=$data["results"];
+      ?>
+
+    <h2>Films : </h2>
+    <div class="row row-cols-1 row-cols-md-3">
+
+    <?php foreach ($titles as $title)
+    {
+      if($title["media_type"]=="movie")
+      {
+        if($title["original_language"]=="fr")
+        {
+          if(in_array("16",$title["genre_ids"]) OR empty($title["genre_ids"]))
+          {
+          ?>
+          <div class="col mb-4">
+            <div class="card h-100">
+            <?php if($title["poster_path"]=="")
+            {
+              ?>
+              <img src="assets/logo.png" class="card-img-top" alt="logo"/>
+              <?php
+            }
+            else
+            {
+            ?>
+            <img src="https://image.tmdb.org/t/p/w500<?php echo $title["poster_path"]; ?>" class="card-img-top" alt="poster">
+            <?php
+            }
+            ?>
+              <div class="card-body">
+                <h5 class="card-title"><?php echo $title["title"];?></h5>
+                <p class="card-text"><?php echo $title["overview"];?></p>
+              </div>
+            </div>
+          </div>
+          <?php
+          }  
+        }
+      }
+    }
+    
+    ?>
+     </div> 
+
+      <h2>Séries : </h2>
+    <div class="row row-cols-1 row-cols-md-3">
+
+    
+    <?php foreach ($titles as $title)
+    {
+      if($title["media_type"]=="tv")
+      {
+        if($title["original_language"]=="fr")
+        {
+          if(in_array("16",$title["genre_ids"]) OR empty($title["genre_ids"]))
+          {
+          ?>
+          <div class="col mb-4">
+            <div class="card h-100">
+             <?php if($title["poster_path"]=="")
+            {
+              ?>
+              <img src="assets/logo.png" class="card-img-top" alt="logo"/>
+              <?php
+            }
+            else
+            {
+            ?>
+            <img src="https://image.tmdb.org/t/p/w500<?php echo $title["poster_path"]; ?>" class="card-img-top" alt="...">
+            <?php
+            }
+            ?>
+              <div class="card-body">
+                <h5 class="card-title"><?php echo $title["name"];?></h5>
+                <p class="card-text"><?php echo $title["overview"];?></p>
+              </div>
+            </div>
+          </div>
+          <?php
+          }  
+        }
+      }
+    }
+    ?>
+    </div>
+    <?php
+    }
+    ?>
+
+
+  </section>
+</main>
+  <?php require ('include/footer.php');?>
 
 
 

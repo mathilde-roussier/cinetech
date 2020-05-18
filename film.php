@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 
 include 'include/requete_film.php';
 

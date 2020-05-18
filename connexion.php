@@ -1,9 +1,11 @@
 <?php
+session_start();
 
 include 'class/user.php';
 
-session_start();
-$user = new user();
+if(!isset($user)){
+  $user = new user();
+}
 
 if (isset($_SESSION['id'])) {
   header('location:index.php');

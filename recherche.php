@@ -1,5 +1,8 @@
 <?php
 
+session_start();
+
+
 if(isset($_GET['search']))
 {
   $search=$_GET['search'];
@@ -87,6 +90,7 @@ else
               <div class="card-body">
                 <h5 class="card-title"><?php echo $title["title"];?></h5>
                 <p class="card-text"><?php echo $title["overview"];?></p>
+                <a href="details.php?id_film=<?php echo $title['id']; ?>" class="btn btn-primary">En voir plus</a>
               </div>
             </div>
           </div>
@@ -130,6 +134,7 @@ else
               <div class="card-body">
                 <h5 class="card-title"><?php echo $title["name"];?></h5>
                 <p class="card-text"><?php echo $title["overview"];?></p>
+                <a href="details.php?id_serie=<?php echo $title['id']; ?>" class="btn btn-primary">En voir plus</a>
               </div>
             </div>
           </div>

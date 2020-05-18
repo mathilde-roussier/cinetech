@@ -16,6 +16,12 @@ if (isset($_GET['id_film'])) {
     // var_dump($_GET['id_film']);
 }
 
+include 'class/bdd.php';
+
+session_start();
+
+$bdd = new bdd();
+
 foreach ($_GET as $champ => $info) {
     $type_media = $champ;
 }
@@ -47,7 +53,12 @@ foreach ($_GET as $champ => $info) {
     <main class="p-5">
     <section class="container-xl justify-content-around p-3">
         <div class="media">
-            <img src="http://image.tmdb.org/t/p/w500<?php echo $data_detail_decode['poster_path']; ?>" class="mr-3" alt="...">
+            <?php if ($data_detail_decode['poster_path'] != null) { ?>
+                <img src="http://image.tmdb.org/t/p/w500<?php echo $data_detail_decode['poster_path']; ?>" class="mr-3" alt="...">
+            <?php } else { ?>
+                <img src="assets/no_img.jpg" class="mr-3" alt="...">
+            <?php } ?>
+
             <div class="media-body">
                 <div class="d-flex justify-content-between">
                     <?php if ($champ == 'id_film') { ?>
@@ -103,7 +114,12 @@ foreach ($_GET as $champ => $info) {
                                 }
                             } ?></p>
 
-                <button id="favoris" type="button" class="btn btn-primary">Ajouter aux favoris</button>
+                <?php if (isset($_SESSION['id'])) {
+                    $bdd->checkfav($info);
+                } else { ?>
+                    <a href="connexion.php" class="btn btn-primary">Ajouter aux favoris</a>
+
+                <?php } ?>
 
             </div>
         </div>

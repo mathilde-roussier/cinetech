@@ -22,5 +22,10 @@ if (isset($_GET["function"])) {
         case "getfav":
             $bdd->getfav();
             break;
+
+        case "supprfav":
+            $id_media = $_GET["id"];
+            $bdd->supprfav($id_media);
+            break;
     }
 }

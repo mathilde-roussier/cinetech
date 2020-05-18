@@ -33,8 +33,8 @@ include 'include/traitement_co_inscri_profil.php';
 
     <main class="container row col-12">
 
-        <section class="container col-6">
-            <h2> Profil </h2>
+        <section class="container row col-6 justify-content-center">
+            <h2 class="d-flex col-12 justify-content-center"> Profil </h2>
             <form action="" method="POST">
                 <div class="form-group">
                     <label for="login">Login</label>
@@ -60,6 +60,9 @@ include 'include/traitement_co_inscri_profil.php';
                 <button type="submit" name="profil" class="btn btn-primary">Modifier</button>
                 <?php if (isset($_POST['profil'])) echo $user->getlastmessage(); ?>
             </form>
+        </section>
+        <section class="container d-flex col-6 justify-content-center">
+            <a href="favoris.php">Liste des favoris</a>
         </section>
     </main>
 

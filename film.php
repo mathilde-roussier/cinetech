@@ -40,7 +40,11 @@ include 'include/requete_film.php';
                 $film = get_object_vars($film);
             ?>
                 <div id="<?php echo $film['id']; ?>" class="card col-2 p-0 m-2" style="width: 18rem;">
-                    <img src="<?php echo "https://image.tmdb.org/t/p/w500" . $film["poster_path"]; ?>" class="card-img-top" alt="...">
+                    <?php if ($film["poster_path"] != NULL) { ?>
+                        <img src="<?php echo "https://image.tmdb.org/t/p/w500" . $film["poster_path"]; ?>" class="card-img-top" alt="...">
+                    <?php } else { ?>
+                        <img src="assets/no_img.jpg" class="card-img-top" alt="img non renseignee">
+                    <?php } ?>
                     <div class="card-body">
                         <h6 class="card-subtitle mb-2 text-muted"><?php echo $film['vote_average']; ?></h6>
                         <h5 class="card-title"><?php echo $film['title']; ?></h5>
@@ -52,16 +56,21 @@ include 'include/requete_film.php';
             ?>
         </section>
 
-        <nav aria-label="...">
+        <nav aria-label="..." style='overflow:auto' ;>
             <ul class="pagination">
                 <li class="page-item disabled">
                     <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
                 </li>
-                <?php for ($i = 1; $i <= $data_decode['total_pages']; $i++) { ?>
-                    <li id="<?php echo $i; ?>" class="page-item"><a id="p<?php echo $i; ?>" class="page-link"><?php echo $i; ?></a></li>
-                <?php } ?>
+                <div id="nbpage<?php echo $data_decode['total_pages']; ?>" class="d-flex justify-content-center">
+                    <?php for ($i = 1; $i <= ($data_decode['total_pages'] * 1 / 4); $i++) { ?>
+                        <li id="<?php echo $i; ?>" <?php if ($i == 1) { ?>class="page-item active" <?php } else { ?> class="page-item" <?php } ?>><a id="p<?php echo $i; ?>" class="page-link"><?php echo $i; ?></a></li>
+                    <?php } ?>
+                    <li name="nop" class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">...</a>
+                    </li>
+                </div>
                 <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
+                    <a class="page-link">Next</a>
                 </li>
             </ul>
         </nav>

@@ -147,7 +147,7 @@ foreach ($_GET as $champ => $info) {
                                     <img src="<?php echo "https://image.tmdb.org/t/p/w500" . $title["poster_path"]; ?>" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <h5 class="card-title"><?php echo $title['name']; ?></h5>
-                                        <a href="details.php?id_film=<?php echo $title['id']; ?>" class="btn btn-primary">En voir plus</a>
+                                        <a href="details.php?id_serie=<?php echo $title['id']; ?>" class="btn btn-primary">En voir plus</a>
                                     </div>
                                 </div>
                             <?php

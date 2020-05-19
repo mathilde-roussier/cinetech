@@ -120,12 +120,22 @@ foreach ($_GET as $champ => $info) {
         <!-- Espace Commentaire -->
 
         <section>
-            <div id="addcomment" class="d-flex col-3 justify-content-between">
-                <textarea placeholder='Commentaire...'></textarea>
-                <button class="btn btn-primary">Valider</button>
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-4">Espace commentaires</h1>
+                    <hr>
+                    <div id="commentAPI">
+                        <?php var_dump($data_reviews_decode); ?>
+                    </div>
+                    <div id="addcomment" class="d-flex col-3 justify-content-between">
+                        <textarea placeholder='Commentaire...'></textarea>
+                        <button class="btn btn-primary">Valider</button>
+                    </div>
+
+                </div>
             </div>
 
-            <?php var_dump($data_reviews_decode); ?>
+
 
         </section>
 

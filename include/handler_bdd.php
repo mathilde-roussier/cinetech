@@ -27,17 +27,5 @@ if (isset($_GET["function"])) {
             $id_media = $_GET["id"];
             $bdd->supprfav($id_media);
             break;
-
-        case "addcomment":
-            $id_media = $_GET["id"];
-            $comment = $_GET["comment"];
-            $id_parent = $_GET["id_parent"];
-            $bdd->addcomment($comment, $id_media, $id_parent);
-            break;
-
-        case "getcomment":
-            $id_media = $_GET['id'];
-            $bdd->getcomment($id_media);
-            break;
     }
 }

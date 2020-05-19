@@ -1,17 +1,47 @@
 <?php
+foreach ($_GET as $champ => $info) {
 
-include 'class/bdd.php';
+    if (isset($_POST['content']) && !empty($_POST['content'])) {
+        $parent_id = isset($_POST['parent_id']) ? $_POST['parent_id'] : 0;
 
-session_start();
-$bdd = new bdd();
+        if ($parent_id != 0) {
+            $bdd->getcom_parent($parent_id);
+        }
 
-$comments = $bdd->getcomment($_GET['id']);
+        $bdd->addcomment($_POST['content'], $_GET[$champ], $parent_id);
+    }
+
+    $comments = $bdd->getcomment($_GET[$champ]);
+}
+
+
+$comments_by_id = [];
 
 ?>
-<?php foreach ($comments as $comment) { ?>
+<?php foreach ($comments as $comment) {
+    $comments_by_id[$comment->id] = $comment;
+}
 
-    <div id="<?php echo $comment['id']; ?>" class="border border-secondary shadow p-3 mb-5 rounded">
-        <p><?php echo $comment['login'] . ' =>'; ?></p>
-        <p><?php echo $comment['commentaire']; ?></p>
+foreach ($comments as $k => $comment) {
+    if ($comment->parent_id != 0) {
+        $comments_by_id[$comment->parent_id]->children[] = $comment;
+        unset($comments[$k]);
+    }
+}
+?>
+
+<?php foreach ($comments as $comment) {
+    include('include/comment.php');
+} ?>
+
+<form action="" id="form-comment" method="post">
+
+    <input type="hidden" name="parent_id" value="0" id="parent_id">
+    <h4> Poster un commentaire</h4>
+    <div class="form-groupe">
+        <textarea name="content" class="form-control" id="content" placeholde="Votre commentaire" required></textarea>
     </div>
-<?php }
+    <div class="form-groupe">
+        <button type="submit" class="btn btn-primary"> Commenter </button>
+    </div>
+</form>

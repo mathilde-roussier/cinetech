@@ -174,65 +174,16 @@ $(document).ready(function () {
         });
     }
 
-    // ********************** Ajouter un commentaire **********************
+    // ********************** Commentaire **********************
+    $('.reply').click(function () {
+        var $form = $('#form-comment');
+        var $this = $(this);
+        var parent_id = $this.data('id');
+        var $comment = $('#comment-'+ parent_id);
 
-    addcomment();
+        $form.find('h4').text('Répondre à ce commentaire');
+        $('#parent_id').val(parent_id);
+        $comment.after($form);
+    })
 
-    function addcomment() {
-        $('button').click(function () {
-            var chemin_bis = window.location.href;
-            var decoupe_chemin_bis = chemin_bis.split('?');
-            var get = decoupe_chemin_bis[1];
-            var decoupe_get = get.split('=');
-            var id = decoupe_get[1];
-
-            var idsup = $(this).parent().parent().attr('id');
-            if ((typeof idsup) !== 'undefined') {
-                var parent_id = idsup.split('collapseExample')[1];
-            }
-            else {
-                var parent_id = '';
-            }
-
-            $.ajax({
-                method: "GET",
-                url: "include/handler_bdd.php",
-                data: { 'function': 'addcomment', 'id': id, 'comment': $(this).prev().val(), 'id_parent': parent_id },
-                datatype: "json",
-                success: function (datatype) {
-                    console.log('ajouté');
-                    $('#comment').val('');
-                    affichecomment();
-                }
-            })
-        });
-    }
-
-
-    affichecomment();
-
-    // ********************** Afficher les commentaires **********************
-
-    function affichecomment() {
-
-        $form = $('#addcomment');
-
-        $('#bdd').empty();
-
-        var chemin_bis = window.location.href;
-        var decoupe_chemin_bis = chemin_bis.split('?');
-        var get = decoupe_chemin_bis[1];
-        var decoupe_get = get.split('=');
-        var id = decoupe_get[1];
-
-        $.ajax({
-            method: 'GET',
-            url: 'commentaire.php',
-            data: { 'id': id },
-            success: function (datatype) {
-                $('#bdd').append(datatype);
-            }
-        });
-
-    }
 });

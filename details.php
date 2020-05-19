@@ -139,14 +139,9 @@ foreach ($_GET as $champ => $info) {
                                 </div>
                         <?php }
                         }; ?>
-                        <div id="bdd">
-
-                        </div>
                     </div>
-                </div>
-                <div id="addcomment" class="d-flex col-3 justify-content-between">
-                    <textarea id="comment" placeholder='Commentaire...'></textarea>
-                    <button id="validComment" class="btn btn-primary">Valider</button>
+
+                    <?php include 'commentaire.php' ?>
                 </div>
             </div>
 

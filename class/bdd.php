@@ -24,7 +24,6 @@ class bdd
 	{
 		$requete = $this->connexion->prepare("INSERT INTO favoris (id_users,id_media,nom_media,type_media,img_media) VALUES (:id_users,:id_media,:nom_media,:type_media,:img_media)");
 		$requete->execute(array(':id_users' => $_SESSION['id'], ':id_media' => $id_media, ':nom_media' => $nom_media, ':type_media' => $type_media, ':img_media' => $img_media));
-		$resultat = $requete->fetchAll(PDO::FETCH_ASSOC); // Supprimer ? 
 	}
 
 	public function getfav()
@@ -41,7 +40,6 @@ class bdd
 		$requete = $this->connexion->prepare("SELECT * FROM favoris WHERE id_users = :id_session");
 		$requete->execute(array(':id_session' => $_SESSION['id']));
 		$resultat_fav = $requete->fetchAll(PDO::FETCH_ASSOC);
-		// var_dump($resultat_fav);
 		if (!empty($resultat_fav)) {
 			foreach ($resultat_fav as $fav) {
 				if ($fav['id_media'] == $id_media) {
@@ -72,7 +70,7 @@ class bdd
 
 	// Fonctions commentaire =>
 
-	public function addcomment($comment, $id_media, $id_parent = '')
+	public function addcomment($comment, $id_media, $id_parent='')
 	{
 		if (!empty($id_parent)) {
 			$requete = $this->connexion->prepare("INSERT INTO commentaires (id_users, commentaire, parent_id, id_media) VALUES (:id_users, :commentaire, :parent_id, :id_media)");
@@ -81,16 +79,22 @@ class bdd
 			$requete = $this->connexion->prepare("INSERT INTO commentaires (id_users, commentaire, id_media) VALUES (:id_users, :commentaire, :id_media)");
 			$requete->execute(array(':id_users' => $_SESSION['id'], ':id_media' => $id_media, ':commentaire' => $comment));
 		}
-		$resultat = $requete->fetchAll(PDO::FETCH_ASSOC); // Supprimer ? 
 	}
 
 	public function getcomment($id_media)
 	{
 		$requete = $this->connexion->prepare("SELECT commentaires.id, users.login, commentaires.commentaire, commentaires.parent_id FROM commentaires INNER JOIN users ON commentaires.id_users = users.id WHERE id_media = :id_media");
 		$requete->execute(array(':id_media' => $id_media));
-		$resultat_comment = $requete->fetchAll(PDO::FETCH_ASSOC);
+		$resultat_comment = $requete->fetchAll(PDO::FETCH_OBJ);
 		return($resultat_comment);
-		// echo json_encode($resultat_comment);
+	}
+
+	public function getcom_parent($parent_id)
+	{
+		$requete = $this->connexion->prepare("SELECT id FROM commentaires WHERE id = :parent_id");
+		$requete->execute(array(':parent_id' => $parent_id));
+		$resultat_comment_parent = $requete->fetch();
+		return($resultat_comment_parent);
 	}
 
 	public function close()

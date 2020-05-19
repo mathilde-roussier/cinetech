@@ -68,12 +68,11 @@ $(document).ready(function () {
                             }
 
                             $('nav div').replaceWith('<div id="nbpage' + data['total_pages'] + '" class="d-flex justify-content-center"></div>');
-                            
+
                             if (page != data['total_pages'] - 1 && page != 1) {
                                 var plage = parseInt(page) + ((1 / 4) * data['total_pages']);
                             }
-                            else if(page == 1)
-                            {
+                            else if (page == 1) {
                                 var plage = ((1 / 4) * data['total_pages']);
                             }
                             else {
@@ -85,17 +84,17 @@ $(document).ready(function () {
                                 $('#nbpage' + data['total_pages']).append(li);
                             }
 
-                            if(page != data['total_pages'] - 1){
+                            if (page != data['total_pages'] - 1) {
                                 $('#nbpage' + data['total_pages']).append('<li name="nop" class="page-item disabled"><a class="page-link" tabindex="-1" aria-disabled="true">...</a></li>');
                                 var li = "<li id='" + data['total_pages'] + "' class='page-item'><a id='p" + data['total_pages'] + "' class='page-link'>" + data['total_pages'] + "</a></li>";
                                 $('#nbpage' + data['total_pages']).append(li);
                             }
-                            if(page != 1){
+                            if (page != 1) {
                                 $('#nbpage' + data['total_pages']).prepend('<li name="nop" class="page-item disabled"><a class="page-link" tabindex="-1" aria-disabled="true">...</a></li>');
                                 var li = "<li id='" + prec_page + "' class='page-item'><a id='p" + prec_page + "' class='page-link'>" + prec_page + "</a></li>";
                                 $('#nbpage' + data['total_pages']).prepend(li);
                             }
-                            
+
                             $('#' + page).attr('class', 'page-item active');
                         }
                     })
@@ -175,4 +174,55 @@ $(document).ready(function () {
         });
     }
 
+    // ********************** Ajouter un commentaire **********************
+
+    $('#validComment').click(function () {
+
+        var chemin_bis = window.location.href;
+        var decoupe_chemin_bis = chemin_bis.split('?');
+        var get = decoupe_chemin_bis[1];
+        var decoupe_get = get.split('=');
+        var id = decoupe_get[1];
+
+        $.ajax({
+            method: "GET",
+            url: "include/handler_bdd.php",
+            data: { 'function': 'addcomment', 'id': id, 'comment': $('#comment').val(), 'id_parent': '' },
+            datatype: "json",
+            success: function (datatype) {
+                console.log('ajouté');
+                $('#comment').val('');
+                affichecomment();
+            }
+        })
+    });
+
+    affichecomment();
+
+    // ********************** Afficher les commentaires **********************
+
+    function affichecomment() {
+
+        var chemin_bis = window.location.href;
+        var decoupe_chemin_bis = chemin_bis.split('?');
+        var get = decoupe_chemin_bis[1];
+        var decoupe_get = get.split('=');
+        var id = decoupe_get[1];
+        $.ajax({
+            method: 'GET',
+            url: 'include/handler_bdd.php',
+            data: { 'function': 'getcomment', 'id': id },
+            datatype: 'json',
+            success: function (datatype) {
+                var data = JSON.parse(datatype);
+
+                $.each(data, function (key, value) {
+                    $('#bdd').append('<div id="' + data[key]['id'] + '" class="border border-secondary shadow p-3 mb-5 rounded" ></div> ');
+                    $('#' + data[key]['id']).append("<p>" + data[key]['login'] + " =></p>");
+                    $('#' + data[key]['id']).append("<p>" + data[key]['commentaire'] + "</p>");
+                })
+            }
+        })
+        $('#bdd').empty();
+    }
 });

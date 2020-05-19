@@ -18,6 +18,8 @@ class bdd
 		return $this->connexion;
 	}
 
+	// Fonctions favoris =>
+
 	public function addfav($id_media, $nom_media, $type_media, $img_media)
 	{
 		$requete = $this->connexion->prepare("INSERT INTO favoris (id_users,id_media,nom_media,type_media,img_media) VALUES (:id_users,:id_media,:nom_media,:type_media,:img_media)");
@@ -66,6 +68,28 @@ class bdd
 	{
 		$requete = $this->connexion->prepare("DELETE FROM favoris WHERE id_media = :id_media");
 		$requete->execute(array(':id_media' => $id_media));
+	}
+
+	// Fonctions commentaire =>
+
+	public function addcomment($comment, $id_media, $id_parent = '')
+	{
+		if (!empty($id_parent)) {
+			$requete = $this->connexion->prepare("INSERT INTO commentaires (id_users, commentaire, parent_id, id_media) VALUES (:id_users, :commentaire, :parent_id, :id_media)");
+			$requete->execute(array(':id_users' => $_SESSION['id'], ':id_media' => $id_media, ':commentaire' => $comment, ':id_parent' => $id_parent));
+		} else {
+			$requete = $this->connexion->prepare("INSERT INTO commentaires (id_users, commentaire, id_media) VALUES (:id_users, :commentaire, :id_media)");
+			$requete->execute(array(':id_users' => $_SESSION['id'], ':id_media' => $id_media, ':commentaire' => $comment));
+		}
+		$resultat = $requete->fetchAll(PDO::FETCH_ASSOC); // Supprimer ? 
+	}
+
+	public function getcomment($id_media)
+	{
+		$requete = $this->connexion->prepare("SELECT commentaires.id, users.login, commentaires.commentaire, commentaires.parent_id FROM commentaires INNER JOIN users ON commentaires.id_users = users.id WHERE id_media = :id_media");
+		$requete->execute(array(':id_media' => $id_media));
+		$resultat_comment = $requete->fetchAll(PDO::FETCH_ASSOC);
+		echo json_encode($resultat_comment);
 	}
 
 	public function close()

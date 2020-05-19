@@ -46,7 +46,7 @@ foreach ($_GET as $champ => $info) {
 
             <div class="media">
                 <?php if ($data_detail_decode['poster_path'] != null) { ?>
-                    <img src="http://image.tmdb.org/t/p/w500<?php echo $data_detail_decode['poster_path']; ?>" class="mr-3" alt="...">
+                    <img src="http://image.tmdb.org/t/p/w500<?php echo $data_detail_decode['poster_path']; ?>" alt="...">
                 <?php } else { ?>
                     <img src="assets/no_img.jpg" class="mr-3" alt="...">
                 <?php } ?>
@@ -124,25 +124,26 @@ foreach ($_GET as $champ => $info) {
                 <div class="container">
                     <h1 class="display-4">Espace commentaires</h1>
                     <hr>
-                    <div id="commentAPI">
+                    <div id="comments">
                         <?php if (!empty($data_reviews_decode['results'])) {
                             foreach ($data_reviews_decode['results'] as $review) {
                         ?>
-                                <div class="border border-secondary shadow p-3 mb-5 rounded">
+                                <div id="<?php echo $data_reviews_decode['id']; ?>" class="border border-secondary shadow p-3 mb-5 rounded">
                                     <p><?php echo get_object_vars($review)['author'] . " =>"; ?></p>
                                     <p><?php echo get_object_vars($review)['content']; ?></p>
                                 </div>
                         <?php }
                         }; ?>
+                        <div id="bdd">
+
+                        </div>
                     </div>
                 </div>
                 <div id="addcomment" class="d-flex col-3 justify-content-between">
-                    <textarea placeholder='Commentaire...'></textarea>
-                    <button class="btn btn-primary">Valider</button>
+                    <textarea id="comment" placeholder='Commentaire...'></textarea>
+                    <button id="validComment" class="btn btn-primary">Valider</button>
                 </div>
             </div>
-
-
 
         </section>
 

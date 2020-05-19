@@ -104,7 +104,7 @@ if ($err) {
           <div class="carousel-item row active">
             <?php for ($i = 0; $i <= 3; $i++) {
             ?>
-              <a href="details.php?id_serie=<?php echo $series_posters[$i]['id'];?>"><div class="col-3 float-left"><img class="img-fluid" src="https://image.tmdb.org/t/p/w500<?php echo $series_posters[$i]["poster_path"]; ?>"></div></a>
+              <a href="details.php?id_serie=<?php echo $series_posters[$i]['id'];?>"><div class="col-12 col-sm-3 col-md-3 col-lg-3 float-left text-center align-center"><img class="img-fluid" src="https://image.tmdb.org/t/p/w500<?php echo $series_posters[$i]["poster_path"]; ?>"></div></a>
             <?php
             }
             ?>
@@ -112,7 +112,7 @@ if ($err) {
           <div class="carousel-item row">
             <?php for ($i = 4; $i <= 7; $i++){
             ?>
-              <a href="details.php?id_serie=<?php echo $series_posters[$i]['id'];?>"><div class="col-3 float-left"><img class="img-fluid" src="https://image.tmdb.org/t/p/w500<?php echo $series_posters[$i]["poster_path"]; ?>"></div></a>
+              <a href="details.php?id_serie=<?php echo $series_posters[$i]['id'];?>"><div class="col-12 col-sm-3 col-md-3 col-lg-3 float-left text-center align-center"><img class="img-fluid" src="https://image.tmdb.org/t/p/w500<?php echo $series_posters[$i]["poster_path"]; ?>"></div></a>
             <?php
             }
             ?>
@@ -135,7 +135,7 @@ if ($err) {
           <div class="carousel-item row active">
             <?php for ($i = 0; $i <= 3; $i++) {
             ?>
-              <a href="details.php?id_film=<?php echo $films_posters[$i]['id'];?>"><div class="col-3 float-left"><img class="img-fluid" src="https://image.tmdb.org/t/p/w500<?php echo $films_posters[$i]["poster_path"]; ?>"></div></a>
+              <a href="details.php?id_film=<?php echo $films_posters[$i]['id'];?>"><div class="col-12 col-sm-3 col-md-3 col-lg-3 float-left text-center align-center"><img class="img-fluid" src="https://image.tmdb.org/t/p/w500<?php echo $films_posters[$i]["poster_path"]; ?>"></div></a>
             <?php
             }
             ?>
@@ -143,7 +143,7 @@ if ($err) {
           <div class="carousel-item row">
             <?php for ($i = 4; $i <= 7; $i++) {
             ?>
-              <a href="details.php?id_film=<?php echo $films_posters[$i]['id'];?>"><div class="col-3 float-left"><img class="img-fluid" src="https://image.tmdb.org/t/p/w500<?php echo $films_posters[$i]["poster_path"]; ?>"></div></a>
+              <a href="details.php?id_film=<?php echo $films_posters[$i]['id'];?>"><div class="col-12 col-sm-3 col-md-3 col-lg-3 float-left text-center align-center"><img class="img-fluid" src="https://image.tmdb.org/t/p/w500<?php echo $films_posters[$i]["poster_path"]; ?>"></div></a>
             <?php
             }
             ?>

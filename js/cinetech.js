@@ -8,8 +8,8 @@ $(document).ready(function () {
         $(".page-link").click(function () {
             var chemin = window.location.pathname;
             var decoupe_chemin = chemin.split('/');
-            var page_actuel = decoupe_chemin[3];
-
+            var page_actuel = decoupe_chemin[decoupe_chemin.length-1];
+            console.log(page_actuel);
             // var nbpage = $(this).parent().parent().attr('id');
 
             var id_next = $(this).parent().next().attr('name');
@@ -28,9 +28,9 @@ $(document).ready(function () {
                 datatype: "json",
                 success: function (datatype) {
                     var data = JSON.parse(datatype);
-                    $('#catalogue').replaceWith("<section id='catalogue' class='container row col-12 justify-content-around'></section>");
+                    $('#catalogue').replaceWith("<section id='catalogue' class='container row col-12 justify-content-around text-center'></section>");
                     $.each(data['results'], function (key, value) {
-                        var div_p = "<div id='" + value['id'] + "'class='card col-2 p-0 m-2' style='width: 18rem;'></div>";
+                        var div_p = "<div id='" + value['id'] + "'class='card col-10 col-sm-8 col-md-4 col-lg-2 p-0 m-2'></div>";
                         $('#catalogue').append(div_p);
                         if (value['poster_path'] !== null) {
                             var img = "<img src='https://image.tmdb.org/t/p/w500" + value['poster_path'] + "' class='card-img-top' alt='...'>";
@@ -41,7 +41,7 @@ $(document).ready(function () {
                         $('#' + value['id']).append(img);
                         var div_i = "<div id='infos" + value['id'] + "'class='card-body'></div>";
                         $('#' + value['id']).append(div_i);
-                        var note = "<h6 class='card-subtitle mb-2 text-muted'>" + value['vote_average'] + "</h6>";
+                        var note = "<h6 class='card-subtitle mb-2 text-muted'>" + value['vote_average'] + " / 10</h6>";
                         $('#infos' + value['id']).append(note);
                         if (page_actuel === 'film.php') {
                             var title = "<h5 class='card-title'>" + value['title'] + "</h5>";

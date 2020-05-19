@@ -44,18 +44,18 @@ foreach ($_GET as $champ => $info) {
 
 
     <main class="p-4">
-        <section class="container-xl justify-content-around p-3">
+        <section class="container-xl justify-content-around p-3 align-center text-center">
                 <?php if ($data_detail_decode['poster_path'] != null) { ?>
                     <img id="img_media"src="http://image.tmdb.org/t/p/w500<?php echo $data_detail_decode['poster_path']; ?>" class="mr-3 img-fluid" alt="...">
                 <?php } else { ?>
-                    <img src="assets/no_img.jpg" class="mr-3" alt="...">
+                    <img src="assets/no_img.jpg" class="mr-3 img-fluid" alt="...">
                 <?php } ?>
 
-                    <div class="d-flex justify-content-between">
+                    <div>
                         <?php if ($champ == 'id_film') { ?>
-                            <h5 class="mt-0"><?php echo $data_detail_decode['title']; ?></h5>
+                            <h5 class="mt-0 display-4"><?php echo $data_detail_decode['title']; ?></h5>
                         <?php } else { ?>
-                            <h5 class="mt-0"><?php echo $data_detail_decode['name']; ?></h5>
+                            <h5 class="mt-0 display-4"><?php echo $data_detail_decode['name']; ?></h5>
                         <?php } ?>
                         <aside><?php echo $data_detail_decode['vote_average']; ?> / 10</aside>
                     </div>
@@ -122,14 +122,16 @@ foreach ($_GET as $champ => $info) {
 
                 <div class="jumbotron jumbotron-fluid mt-4 text-center">
                     <div class="container">
-                        <h2 class="display-4">Vous pourriez aussi aimer</h2>
+                        <h4 class="display-4">Vous pourriez aussi aimer</h4>
                         <div class="row justify-content-around">
 
                             <?php
                             foreach ($reco as $title) {
+                                if ($champ == 'id_film')
+                                {
                             ?>
 
-                                <div id="<?php echo $title['id']; ?>" class="card col-10 col-sm-10 col-md-6 col-lg-4 p-0 m-2" style="width: 18rem;">
+                                <div id="<?php echo $title['id']; ?>" class="card col-10 col-sm-10 col-md-6 col-lg-3 p-0 m-2">
                                     <img src="<?php echo "https://image.tmdb.org/t/p/w500" . $title["poster_path"]; ?>" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <h5 class="card-title"><?php echo $title['title']; ?></h5>
@@ -137,6 +139,19 @@ foreach ($_GET as $champ => $info) {
                                     </div>
                                 </div>
                             <?php
+                                }
+                                else
+                                {
+                            ?>
+                                    <div id="<?php echo $title['id']; ?>" class="card col-10 col-sm-10 col-md-6 col-lg-3 p-0 m-2">
+                                    <img src="<?php echo "https://image.tmdb.org/t/p/w500" . $title["poster_path"]; ?>" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?php echo $title['name']; ?></h5>
+                                        <a href="details.php?id_film=<?php echo $title['id']; ?>" class="btn btn-primary">En voir plus</a>
+                                    </div>
+                                </div>
+                            <?php
+                                }
                             }
                             ?>
                         </div>

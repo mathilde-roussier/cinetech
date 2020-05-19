@@ -28,10 +28,10 @@ $(document).ready(function () {
                 datatype: "json",
                 success: function (datatype) {
                     var data = JSON.parse(datatype);
-                    $('main section').replaceWith("<section class='container row col-12 justify-content-around'></section>");
+                    $('#catalogue').replaceWith("<section id='catalogue' class='container row col-12 justify-content-around'></section>");
                     $.each(data['results'], function (key, value) {
                         var div_p = "<div id='" + value['id'] + "'class='card col-2 p-0 m-2' style='width: 18rem;'></div>";
-                        $('section').append(div_p);
+                        $('#catalogue').append(div_p);
                         if (value['poster_path'] !== null) {
                             var img = "<img src='https://image.tmdb.org/t/p/w500" + value['poster_path'] + "' class='card-img-top' alt='...'>";
                         }

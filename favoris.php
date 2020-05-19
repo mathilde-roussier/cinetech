@@ -23,7 +23,7 @@ if (!isset($_SESSION['id'])) {
     <!-- notre js -->
     <script src='https://code.jquery.com/jquery-3.4.1.js'></script>
     <script src="js/cinetech.js"></script>
-
+    
     <title> Mes favoris </title>
 </head>
 

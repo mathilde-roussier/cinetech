@@ -176,26 +176,38 @@ $(document).ready(function () {
 
     // ********************** Ajouter un commentaire **********************
 
-    $('#validComment').click(function () {
+    addcomment();
 
-        var chemin_bis = window.location.href;
-        var decoupe_chemin_bis = chemin_bis.split('?');
-        var get = decoupe_chemin_bis[1];
-        var decoupe_get = get.split('=');
-        var id = decoupe_get[1];
+    function addcomment() {
+        $('button').click(function () {
+            var chemin_bis = window.location.href;
+            var decoupe_chemin_bis = chemin_bis.split('?');
+            var get = decoupe_chemin_bis[1];
+            var decoupe_get = get.split('=');
+            var id = decoupe_get[1];
 
-        $.ajax({
-            method: "GET",
-            url: "include/handler_bdd.php",
-            data: { 'function': 'addcomment', 'id': id, 'comment': $('#comment').val(), 'id_parent': '' },
-            datatype: "json",
-            success: function (datatype) {
-                console.log('ajouté');
-                $('#comment').val('');
-                affichecomment();
+            var idsup = $(this).parent().parent().attr('id');
+            if ((typeof idsup) !== 'undefined') {
+                var parent_id = idsup.split('collapseExample')[1];
             }
-        })
-    });
+            else {
+                var parent_id = '';
+            }
+
+            $.ajax({
+                method: "GET",
+                url: "include/handler_bdd.php",
+                data: { 'function': 'addcomment', 'id': id, 'comment': $(this).prev().val(), 'id_parent': parent_id },
+                datatype: "json",
+                success: function (datatype) {
+                    console.log('ajouté');
+                    $('#comment').val('');
+                    affichecomment();
+                }
+            })
+        });
+    }
+
 
     affichecomment();
 
@@ -203,26 +215,24 @@ $(document).ready(function () {
 
     function affichecomment() {
 
+        $form = $('#addcomment');
+
+        $('#bdd').empty();
+
         var chemin_bis = window.location.href;
         var decoupe_chemin_bis = chemin_bis.split('?');
         var get = decoupe_chemin_bis[1];
         var decoupe_get = get.split('=');
         var id = decoupe_get[1];
+
         $.ajax({
             method: 'GET',
-            url: 'include/handler_bdd.php',
-            data: { 'function': 'getcomment', 'id': id },
-            datatype: 'json',
+            url: 'commentaire.php',
+            data: { 'id': id },
             success: function (datatype) {
-                var data = JSON.parse(datatype);
-
-                $.each(data, function (key, value) {
-                    $('#bdd').append('<div id="' + data[key]['id'] + '" class="border border-secondary shadow p-3 mb-5 rounded" ></div> ');
-                    $('#' + data[key]['id']).append("<p>" + data[key]['login'] + " =></p>");
-                    $('#' + data[key]['id']).append("<p>" + data[key]['commentaire'] + "</p>");
-                })
+                $('#bdd').append(datatype);
             }
-        })
-        $('#bdd').empty();
+        });
+
     }
 });

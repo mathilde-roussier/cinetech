@@ -76,7 +76,7 @@ class bdd
 	{
 		if (!empty($id_parent)) {
 			$requete = $this->connexion->prepare("INSERT INTO commentaires (id_users, commentaire, parent_id, id_media) VALUES (:id_users, :commentaire, :parent_id, :id_media)");
-			$requete->execute(array(':id_users' => $_SESSION['id'], ':id_media' => $id_media, ':commentaire' => $comment, ':id_parent' => $id_parent));
+			$requete->execute(array(':id_users' => $_SESSION['id'], ':id_media' => $id_media, ':commentaire' => $comment, ':parent_id' => $id_parent));
 		} else {
 			$requete = $this->connexion->prepare("INSERT INTO commentaires (id_users, commentaire, id_media) VALUES (:id_users, :commentaire, :id_media)");
 			$requete->execute(array(':id_users' => $_SESSION['id'], ':id_media' => $id_media, ':commentaire' => $comment));
@@ -89,7 +89,8 @@ class bdd
 		$requete = $this->connexion->prepare("SELECT commentaires.id, users.login, commentaires.commentaire, commentaires.parent_id FROM commentaires INNER JOIN users ON commentaires.id_users = users.id WHERE id_media = :id_media");
 		$requete->execute(array(':id_media' => $id_media));
 		$resultat_comment = $requete->fetchAll(PDO::FETCH_ASSOC);
-		echo json_encode($resultat_comment);
+		return($resultat_comment);
+		// echo json_encode($resultat_comment);
 	}
 
 	public function close()

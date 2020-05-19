@@ -125,13 +125,20 @@ foreach ($_GET as $champ => $info) {
                     <h1 class="display-4">Espace commentaires</h1>
                     <hr>
                     <div id="commentAPI">
-                        <?php var_dump($data_reviews_decode); ?>
+                        <?php if (!empty($data_reviews_decode['results'])) {
+                            foreach ($data_reviews_decode['results'] as $review) {
+                        ?>
+                                <div class="border border-secondary shadow p-3 mb-5 rounded">
+                                    <p><?php echo get_object_vars($review)['author'] . " =>"; ?></p>
+                                    <p><?php echo get_object_vars($review)['content']; ?></p>
+                                </div>
+                        <?php }
+                        }; ?>
                     </div>
-                    <div id="addcomment" class="d-flex col-3 justify-content-between">
-                        <textarea placeholder='Commentaire...'></textarea>
-                        <button class="btn btn-primary">Valider</button>
-                    </div>
-
+                </div>
+                <div id="addcomment" class="d-flex col-3 justify-content-between">
+                    <textarea placeholder='Commentaire...'></textarea>
+                    <button class="btn btn-primary">Valider</button>
                 </div>
             </div>
 

@@ -5,8 +5,8 @@ echo "[";
 
 //FILMS
 $total_pages_f=56;
-
-for($i=1;$i<=$total_pages_f;$i++)
+$var=[mt_rand(1, $total_pages_f),mt_rand(1, $total_pages_f),mt_rand(1, $total_pages_f),mt_rand(1, $total_pages_f),mt_rand(1, $total_pages_f)];
+foreach($var as $i)
 {
   $curl = curl_init();
 
@@ -52,8 +52,9 @@ for($i=1;$i<=$total_pages_f;$i++)
 
 //SERIES
 $total_pages_s=12;
+$var2=[mt_rand(1, $total_pages_s),mt_rand(1, $total_pages_s)];
 
-for($i=1;$i<=$total_pages_s;$i++)
+foreach($var2 as $i)
 {
   $curl = curl_init();
 
@@ -87,7 +88,7 @@ for($i=1;$i<=$total_pages_s;$i++)
   } 
   else {
     foreach ($titles as $title) {
-      if($i!==$total_pages_s)
+      if($i!==end($var2))
       {
         $data=json_encode($title["name"],true);
         echo $data.",";

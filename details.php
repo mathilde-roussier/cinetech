@@ -57,11 +57,11 @@ foreach ($_GET as $champ => $info) {
                         <?php } else { ?>
                             <h5 class="mt-0 display-4"><?php echo $data_detail_decode['name']; ?></h5>
                         <?php } ?>
-                        <aside><?php echo $data_detail_decode['vote_average']; ?> / 10</aside>
+                        <aside>Note : <?php echo $data_detail_decode['vote_average']; ?> / 10</aside>
                     </div>
                     <p><?php echo $data_detail_decode['overview']; ?></p>
                     <?php if ($champ == 'id_film') { ?>
-                        <p><?php echo $data_detail_decode['runtime'] . " min"; ?></p>
+                        <p>Durée : <?php echo $data_detail_decode['runtime'] . " min"; ?></p>
                         <?php } else {
                         if (!empty($data_detail_decode['episode_run_time'])) { ?>
                             <p><?php echo $data_detail_decode['episode_run_time'][0] . " min"; ?></p>
@@ -71,19 +71,19 @@ foreach ($_GET as $champ => $info) {
                             echo get_object_vars($genres)['name'] . " | ";
                         } ?></p>
                     <?php if ($champ == 'id_film') { ?>
-                        <p><?php echo $data_detail_decode['release_date']; ?></p>
+                        <p>Sortie : <?php echo $data_detail_decode['release_date']; ?></p>
                     <?php } else { ?>
-                        <p><?php echo $data_detail_decode['first_air_date'] . " | " . $data_detail_decode['last_air_date']; ?></p>
-                        <p>Season(s) : <?php echo $data_detail_decode['number_of_seasons']; ?></p>
-                        <p>Episode(s) : <?php echo $data_detail_decode['number_of_episodes']; ?></p>
+                        <p>Première diffusion : <?php echo $data_detail_decode['first_air_date'] . " | Dernière diffusion : " . $data_detail_decode['last_air_date']; ?></p>
+                        <p>Nombre de saison(s) : <?php echo $data_detail_decode['number_of_seasons']; ?></p>
+                        <p>Nombre d'épisode(s) : <?php echo $data_detail_decode['number_of_episodes']; ?></p>
                     <?php } ?>
 
-                    <p>Stars : <?php if (count($data_credit_decode['cast']) > 2) {
+                    <p>Acteur(s) : <?php if (count($data_credit_decode['cast']) > 2) {
                                     for ($i = 0; $i <= 2; $i++) {
                                         echo get_object_vars($data_credit_decode['cast'][$i])['name'] . " , ";
                                     }
                                 ?>
-                            etc..</p>
+                            etc...</p>
                 <?php
                                 } elseif (empty($data_credit_decode['cast'])) { ?>
                     non communiquées.</p>
@@ -95,13 +95,13 @@ foreach ($_GET as $champ => $info) {
                 <?php
                                 } ?>
                 <?php if ($champ == 'id_film') { ?>
-                    <p>Director(s) : <?php foreach ($data_credit_decode['crew'] as $crew) {
+                    <p>Réalisateur(s) : <?php foreach ($data_credit_decode['crew'] as $crew) {
                                             if (get_object_vars($crew)['job'] == 'Director') {
                                                 echo get_object_vars($crew)['name'] . " , ";
                                             }
                                         } ?></p>
                 <?php } else { ?>
-                    <p>Creator(s) : <?php foreach ($data_detail_decode['created_by'] as $creator) {
+                    <p>Producteur(s) : <?php foreach ($data_detail_decode['created_by'] as $creator) {
                                         echo get_object_vars($creator)['name'] . " , ";
                                     }
                                 } ?></p>

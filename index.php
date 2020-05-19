@@ -90,7 +90,7 @@ if ($err) {
 
 <body>
   <?php require('include/header.php'); ?>
-  <main class="p-5">
+  <main class="p-4">
     <section class="container-xl justify-content-around p-3">
       <div class="row justify-content-center justify-items-center d-flex align-content-stretch m-5">
         <h1 class="display-4 text-center m-2">Bienvenue sur l'Animatek</h1>

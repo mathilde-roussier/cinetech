@@ -10,7 +10,8 @@ include 'include/requete_film.php';
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- css boostrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -25,21 +26,22 @@ include 'include/requete_film.php';
     <!-- notre js -->
     <script src='https://code.jquery.com/jquery-3.4.1.js'></script>
     <script src="js/cinetech.js"></script>
+    <script src="js/script.js"></script>
 
-    <title>Film</title>
+    <title>L'Animatek - Films</title>
 </head>
 
 <body>
 
     <?php include 'include/header.php'; ?>
+    <main class="p-4 justify-content-around">
+    <section class="container-xl row col-12 justify-content-around p-3 m-1">
 
-    <main class="container row col-12 justify-content-around">
-        <section class='container row col-12 justify-content-around'>
             <?php
             foreach ($data_decode['results'] as $film) {
                 $film = get_object_vars($film);
             ?>
-                <div id="<?php echo $film['id']; ?>" class="card col-2 p-0 m-2" style="width: 18rem;">
+                <div id="<?php echo $film['id']; ?>" class="card col-10 col-sm-8 col-md-4 col-lg-2 p-0 m-2">
                     <?php if ($film["poster_path"] != NULL) { ?>
                         <img src="<?php echo "https://image.tmdb.org/t/p/w500" . $film["poster_path"]; ?>" class="card-img-top" alt="...">
                     <?php } else { ?>
@@ -54,7 +56,6 @@ include 'include/requete_film.php';
             <?php
             }
             ?>
-        </section>
 
         <nav aria-label="..." style='overflow:auto' ;>
             <ul class="pagination">
@@ -71,11 +72,19 @@ include 'include/requete_film.php';
                 </div>
             </ul>
         </nav>
+        </section>
 
     </main>
 
     <?php include 'include/footer.php'; ?>
-
+  <!--SCRIPTS
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="js/script.js"></script>
+  <script type="text/javascript" src="js/cinetech.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+-->
 </body>
 
 </html>

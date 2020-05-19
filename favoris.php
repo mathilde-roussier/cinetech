@@ -15,29 +15,21 @@ if (!isset($_SESSION['id'])) {
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <!-- css boostrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-    <!-- notre css -->
-    <link rel="stylesheet" href="styles/style.css">
-
-    <!-- notre js -->
-    <script src='https://code.jquery.com/jquery-3.4.1.js'></script>
-    <script src="js/cinetech.js"></script>
-
-    <title> Mes favoris </title>
+    <title>L'Animatek - Mes favoris </title>
 </head>
 
 <body>
 
     <?php include 'include/header.php'; ?>
-
-    <main class="container row col-12">
-
-        <section class="container">
-            <h2> Mes Favoris </h2>
+    <main class="p-4">
+    <section class="container-xl justify-content-around p-3">
+    
+            <h2 class="h2 text-center"> Mes Favoris </h2>
             <div class="row col-12 justify-content-around" id="div_favori">
             </div>
         </section>
@@ -45,6 +37,13 @@ if (!isset($_SESSION['id'])) {
 
     <?php include 'include/footer.php'; ?>
 
+  <!--SCRIPTS-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="js/script.js"></script>
+  <script src="js/cinetech.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 
 </html>

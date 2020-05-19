@@ -28,19 +28,14 @@ foreach ($_GET as $champ => $info) {
 
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-    <meta charset="UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <!-- css boostrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles/style.css">
 
-    <!-- notre js -->
-    <script src='https://code.jquery.com/jquery-3.4.1.js'></script>
-    <script src="js/cinetech.js"></script>
-
-    <title>Details</title>
+    <title>L'Animatek - Détails</title>
 </head>
 
 <body>
@@ -48,16 +43,14 @@ foreach ($_GET as $champ => $info) {
     <?php include 'include/header.php'; ?>
 
 
-    <main class="p-5">
+    <main class="p-4">
         <section class="container-xl justify-content-around p-3">
-            <div class="media">
                 <?php if ($data_detail_decode['poster_path'] != null) { ?>
-                    <img id="img_media"src="http://image.tmdb.org/t/p/w500<?php echo $data_detail_decode['poster_path']; ?>" class="mr-3" alt="...">
+                    <img id="img_media"src="http://image.tmdb.org/t/p/w500<?php echo $data_detail_decode['poster_path']; ?>" class="mr-3 img-fluid" alt="...">
                 <?php } else { ?>
                     <img src="assets/no_img.jpg" class="mr-3" alt="...">
                 <?php } ?>
 
-                <div class="media-body">
                     <div class="d-flex justify-content-between">
                         <?php if ($champ == 'id_film') { ?>
                             <h5 class="mt-0"><?php echo $data_detail_decode['title']; ?></h5>
@@ -120,8 +113,7 @@ foreach ($_GET as $champ => $info) {
 
                     <?php } ?>
 
-                </div>
-            </div>
+               
 
             <?php
             //RECOMMANDATIONS
@@ -130,14 +122,14 @@ foreach ($_GET as $champ => $info) {
 
                 <div class="jumbotron jumbotron-fluid mt-4 text-center">
                     <div class="container">
-                        <h1 class="display-4">Vous pourriez aussi aimer</h1>
+                        <h2 class="display-4">Vous pourriez aussi aimer</h2>
                         <div class="row justify-content-around">
 
                             <?php
                             foreach ($reco as $title) {
                             ?>
 
-                                <div id="<?php echo $title['id']; ?>" class="card col-3 p-0 m-2" style="width: 18rem;">
+                                <div id="<?php echo $title['id']; ?>" class="card col-10 col-sm-10 col-md-6 col-lg-4 p-0 m-2" style="width: 18rem;">
                                     <img src="<?php echo "https://image.tmdb.org/t/p/w500" . $title["poster_path"]; ?>" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <h5 class="card-title"><?php echo $title['title']; ?></h5>
@@ -161,6 +153,7 @@ foreach ($_GET as $champ => $info) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/script.js"></script>
+    <script src="js/cinetech.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>

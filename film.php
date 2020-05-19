@@ -36,7 +36,7 @@ include 'include/requete_film.php';
     <?php include 'include/header.php'; ?>
     <main class="p-4 justify-content-around">
         <section class="container-xl row col-12 justify-content-around p-3 m-1">
-            <section id="catalogue" class="container row col-12 justify-content-around'">
+            <section id="catalogue" class="container row col-12 justify-content-around">
 
                 <?php
                 foreach ($data_decode['results'] as $film) {

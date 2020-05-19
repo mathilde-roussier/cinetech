@@ -32,7 +32,7 @@ include 'include/requete_serie.php';
     <?php include 'include/header.php'; ?>
     <main class="p-4">
         <section class="container-xl row col-12 justify-content-around p-3 m-1">
-            <section id="catalogue" class="container row col-12 justify-content-around'">
+            <section id="catalogue" class="container row col-12 justify-content-around">
 
                 <?php
                 foreach ($data_decode['results'] as $serie) {

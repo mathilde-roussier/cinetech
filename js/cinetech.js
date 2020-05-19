@@ -150,12 +150,12 @@ $(document).ready(function () {
                     $('#ss' + value['id_media']).append('<h5 class="card-title">' + value['nom_media'] + '</h5>');
                     $('#ss' + value['id_media']).append('<aside class="d-flex justify-content-between" id="btn' + value['id_media'] + '"></aside>');
                     $('#btn' + value['id_media']).append('<a class="btn btn-primary" href="details.php?' + value['type_media'] + '=' + value['id_media'] + '">Voir plus</a>');
-                    $('#btn' + value['id_media']).append('<button class="btn btn-danger">Supprimer</button>');
+                    $('#btn' + value['id_media']).append('<button id="suppr" class="btn btn-danger">Supprimer</button>');
                 })
 
                 // ********************** Supprimer de la liste des favoris **********************
 
-                $('button').click(function () {
+                $('#suppr').click(function () {
                     var id_pa = $(this).parent().parent().parent().attr('id');
                     var split_id = id_pa.split('fav');
                     var id_suppr = split_id[1];

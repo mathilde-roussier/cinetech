@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 17 mai 2020 à 10:22
+-- Généré le :  mar. 19 mai 2020 à 23:26
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.2.18
 
@@ -33,12 +33,21 @@ USE `cinetech`;
 DROP TABLE IF EXISTS `commentaires`;
 CREATE TABLE IF NOT EXISTS `commentaires` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_users` int(11) DEFAULT NULL,
+  `id_users` int(11) NOT NULL,
   `commentaire` longtext NOT NULL,
   `parent_id` int(11) DEFAULT '0',
+  `id_media` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_users` (`id_users`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=205 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `commentaires`
+--
+
+INSERT INTO `commentaires` (`id`, `id_users`, `commentaire`, `parent_id`, `id_media`) VALUES
+(204, 5, 'Je suis du mÃªme avis ! ', 203, 16306),
+(203, 4, 'J\'adore vraiment ce film il est trop cool :) ', 0, 16306);
 
 -- --------------------------------------------------------
 
@@ -49,14 +58,24 @@ CREATE TABLE IF NOT EXISTS `commentaires` (
 DROP TABLE IF EXISTS `favoris`;
 CREATE TABLE IF NOT EXISTS `favoris` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_users` int(11) DEFAULT NULL,
+  `id_users` int(11) NOT NULL,
   `id_media` int(11) NOT NULL,
   `nom_media` varchar(255) NOT NULL,
   `type_media` varchar(255) NOT NULL,
   `img_media` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_users` (`id_users`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=64 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `favoris`
+--
+
+INSERT INTO `favoris` (`id`, `id_users`, `id_media`, `nom_media`, `type_media`, `img_media`) VALUES
+(62, 4, 586945, 'La TraversÃ©e', 'id_film', 'http://image.tmdb.org/t/p/w500/eDv3y4biYkCYHSCRXfxOFHaECwr.jpg'),
+(63, 4, 3508, 'Candy Boy', 'id_film', 'http://image.tmdb.org/t/p/w500/6yM0buxrFN3Gh6fwqfThusngMdI.jpg'),
+(60, 5, 2632, 'Il Ã©tait une foisâ€¦ la Vie', 'id_serie', 'http://image.tmdb.org/t/p/w500/rs339eWHkz5AnYI935EFzmnPoFf.jpg'),
+(61, 5, 586940, 'J\'ai perdu mon corps', 'id_film', 'http://image.tmdb.org/t/p/w500/yWLis6kHMffkUluFbPGs876Ib5y.jpg');
 
 -- --------------------------------------------------------
 
@@ -71,7 +90,15 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `users`
+--
+
+INSERT INTO `users` (`id`, `login`, `email`, `password`) VALUES
+(5, 'test', 'test@test.com', '$2y$12$BX8/1AjmxIok/Sau0.RBeO5iBpNM4wqDierHtWB1bu7omxkwohAmK'),
+(4, 'Mathilde', 'mathilde.roussier@laplateforme.io', '$2y$12$65X9yEjzWB4KJ./aNfOz3eE/ylh6LhxnzO4jNkNhDLdYcV.a6NutC');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

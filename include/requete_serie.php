@@ -38,6 +38,7 @@ if (empty($_GET)) {
             // set url
             $newurl = "http://api.themoviedb.org/3/tv/" . $info . "?api_key=21265361ae3ee1f790c63a3a2973a4f2&language=fr-FR";
             $newurl_credit = "http://api.themoviedb.org/3/tv/" . $info . "/credits?api_key=21265361ae3ee1f790c63a3a2973a4f2";
+            $url_reviews = "http://api.themoviedb.org/3/tv/" . $info . "/reviews?api_key=21265361ae3ee1f790c63a3a2973a4f2";
             // echo $newurl;
         }
 
@@ -64,6 +65,20 @@ if (empty($_GET)) {
             // var_dump($data);
 
             $data_credit_decode = get_object_vars($data_credit);
+
+            // REVIEWS 
+
+            curl_setopt($ch1, CURLOPT_URL, $url_reviews);
+
+            //return the transfer as a string
+            curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);
+
+            // $output contains the output string
+            $output_reviews = curl_exec($ch1);
+
+            $data_reviews = JSON_decode($output_reviews);
+
+            $data_reviews_decode = get_object_vars($data_reviews);
         }
 
         $data_detail = JSON_decode($output);

@@ -71,8 +71,7 @@ $(document).ready(function () {
                             if (page != data['total_pages'] - 1 && page != 1) {
                                 var plage = parseInt(page) + ((1 / 4) * data['total_pages']);
                             }
-                            else if(page == 1)
-                            {
+                            else if (page == 1) {
                                 var plage = ((1 / 4) * data['total_pages']);
                             }
                             else {
@@ -84,17 +83,17 @@ $(document).ready(function () {
                                 $('#nbpage' + data['total_pages']).append(li);
                             }
 
-                            if(page != data['total_pages'] - 1){
+                            if (page != data['total_pages'] - 1) {
                                 $('#nbpage' + data['total_pages']).append('<li name="nop" class="page-item disabled"><a class="page-link" tabindex="-1" aria-disabled="true">...</a></li>');
                                 var li = "<li id='" + data['total_pages'] + "' class='page-item'><a id='p" + data['total_pages'] + "' class='page-link'>" + data['total_pages'] + "</a></li>";
                                 $('#nbpage' + data['total_pages']).append(li);
                             }
-                            if(page != 1){
+                            if (page != 1) {
                                 $('#nbpage' + data['total_pages']).prepend('<li name="nop" class="page-item disabled"><a class="page-link" tabindex="-1" aria-disabled="true">...</a></li>');
                                 var li = "<li id='" + prec_page + "' class='page-item'><a id='p" + prec_page + "' class='page-link'>" + prec_page + "</a></li>";
                                 $('#nbpage' + data['total_pages']).prepend(li);
                             }
-                            
+
                             $('#' + page).attr('class', 'page-item active');
                         }
                     })
@@ -124,7 +123,7 @@ $(document).ready(function () {
             datatype: "json",
             success: function (datatype) {
                 console.log('ajouté');
-                $('#favoris').replaceWith('<button type="button" class="btn col-3 btn-primary disabled d-flex align-items-baseline justify-content-between">Favori <svg class="bi bi-star-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"> <path d = "M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" /></svg ></button > ');
+                $('#favoris').replaceWith('<button type="button" class="btn btn-primary disabled">Favori <svg class="bi bi-star-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"> <path d = "M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" /></svg ></button > ');
             }
         })
     });
@@ -150,12 +149,12 @@ $(document).ready(function () {
                     $('#ss' + value['id_media']).append('<h5 class="card-title">' + value['nom_media'] + '</h5>');
                     $('#ss' + value['id_media']).append('<aside class="d-flex justify-content-between" id="btn' + value['id_media'] + '"></aside>');
                     $('#btn' + value['id_media']).append('<a class="btn btn-primary" href="details.php?' + value['type_media'] + '=' + value['id_media'] + '">Voir plus</a>');
-                    $('#btn' + value['id_media']).append('<button id="suppr" class="btn btn-danger">Supprimer</button>');
+                    $('#btn' + value['id_media']).append('<button class="btn btn-danger suppr">Supprimer</button>');
                 })
 
                 // ********************** Supprimer de la liste des favoris **********************
 
-                $('#suppr').click(function () {
+                $('.suppr').click(function () {
                     var id_pa = $(this).parent().parent().parent().attr('id');
                     var split_id = id_pa.split('fav');
                     var id_suppr = split_id[1];
@@ -174,5 +173,17 @@ $(document).ready(function () {
             }
         });
     }
+
+    // ********************** Commentaire **********************
+    $('.reply').click(function () {
+        var $form = $('#form-comment');
+        var $this = $(this);
+        var parent_id = $this.data('id');
+        var $comment = $('#comment-'+ parent_id);
+
+        $form.find('h4').text('Répondre à ce commentaire');
+        $('#parent_id').val(parent_id);
+        $comment.after($form);
+    })
 
 });

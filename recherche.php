@@ -121,7 +121,7 @@ else
              <?php if($title["poster_path"]=="")
             {
               ?>
-              <img src="assets/logo.png" class="card-img-top" alt="logo"/>
+              <img src="assets/no_img.jpg" class="card-img-top" alt="logo"/>
               <?php
             }
             else

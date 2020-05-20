@@ -44,9 +44,9 @@ foreach ($comments as $k => $comment) {
     </div>
     <div class="form-groupe">
         <?php if (isset($_SESSION['id'])) { ?>
-            <button type="submit" class="btn btn-primary"> Commenter </button>
+            <button type="submit" class="btn btn-primary m-1"> Commenter </button>
         <?php } else { ?>
-            <a href="connexion.php" class="btn btn-primary"> Commenter </a>
+            <a href="connexion.php" class="btn btn-primary m-1"> Commenter </a>
         <?php } ?>
     </div>
 </form>

@@ -171,7 +171,7 @@ foreach ($_GET as $champ => $info) {
 
                 <div class="jumbotron jumbotron-fluid">
                     <div class="container">
-                        <h1 class="display-4">Espace commentaires</h1>
+                        <h4 class="display-4">Espace commentaires</h4>
                         <hr>
                         <div id="comments">
                             <?php if (!empty($data_reviews_decode['results'])) {

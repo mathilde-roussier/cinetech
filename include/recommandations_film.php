@@ -44,9 +44,12 @@ for($i=1;$i<=$total_pages_f;$i++)
       {
         if(in_array("16",$title["genre_ids"]) OR empty($title["genre_ids"]))
         {
-          if(count($reco)<=2)
+          if(!in_array($title,$reco))
           {
-            array_push($reco,$title);
+            if(count($reco)<=2)
+            {
+              array_push($reco,$title);
+            }
           }
         }
       }
